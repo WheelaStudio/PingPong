@@ -2,6 +2,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     [SerializeField] private AudioSource collisonSoundSource;
+    private float maxVelocity = 12f;
     private Rigidbody2D body;
     private void Start()
     {
@@ -11,5 +12,9 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collisonSoundSource.Play();
+    }
+    private void FixedUpdate()
+    {
+       body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 }
