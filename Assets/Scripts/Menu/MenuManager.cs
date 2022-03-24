@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
     }
     public void StartGame(int gameMode)
     {
-        if(gameMode != 1)
+        if (gameMode != 1)
         {
 #if UNITY_ANDROID
             AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -25,9 +25,11 @@ public class MenuManager : MonoBehaviourPunCallbacks
             }
 #endif
         }
-
-        Preferences.gameMode = (GameMode)gameMode;
-        SceneLoader.LoadScene(Scene.Game);
+        else
+        {
+            Preferences.gameMode = (GameMode)gameMode;
+            SceneLoader.LoadScene(Scene.Game);
+        }
     }
 
 }
