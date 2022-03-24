@@ -1,9 +1,6 @@
 using UnityEngine;
-public class UncontrolledBall : MonoBehaviour
+public class ScreenBordersColliderSpawner : MonoBehaviour
 {
-    private Rigidbody2D body;
-    private Vector2 startDirection;
-    [SerializeField] private AudioSource collisonSoundSource;
     private void Start()
     {
         var camera = Camera.main;
@@ -30,12 +27,5 @@ public class UncontrolledBall : MonoBehaviour
         colliderpoints[0] = new Vector2(rUCorner.x, rUCorner.y);
         colliderpoints[1] = new Vector2(rUCorner.x, lDCorner.y);
         rightEdge.points = colliderpoints;
-        body = GetComponent<Rigidbody2D>();
-        startDirection = new Vector2(Random.Range(0, 2) == 0 ? -0.1f : 0.1f, Random.Range(0, 2) == 0 ? -0.1f : 0.1f);
-        body.AddForce(startDirection, ForceMode2D.Impulse);
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        collisonSoundSource.Play();
     }
 }
