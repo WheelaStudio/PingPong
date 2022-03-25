@@ -1,6 +1,7 @@
 using UnityEngine;
 public class ScreenBordersColliderSpawner : MonoBehaviour
 {
+    [SerializeField] private bool registerCollision;
     private void Start()
     {
         var camera = Camera.main;
@@ -17,12 +18,32 @@ public class ScreenBordersColliderSpawner : MonoBehaviour
         colliderpoints[0] = new Vector2(lDCorner.x, lDCorner.y);
         colliderpoints[1] = new Vector2(rUCorner.x, lDCorner.y);
         lowerEdge.points = colliderpoints;
-        EdgeCollider2D leftEdge = new GameObject("leftEdge").AddComponent<EdgeCollider2D>();
+        var leftEdgeGO = new GameObject("leftEdge");
+        if(registerCollision)
+        {
+            leftEdgeGO.AddComponent<Border>().player = Player.Right;
+            leftEdgeGO.tag = "Border";
+        }
+        var leftEdge = leftEdgeGO.AddComponent<EdgeCollider2D>();
+        if (registerCollision)
+        {
+            leftEdge.isTrigger = true;
+        }
         colliderpoints = leftEdge.points;
         colliderpoints[0] = new Vector2(lDCorner.x, lDCorner.y);
         colliderpoints[1] = new Vector2(lDCorner.x, rUCorner.y);
         leftEdge.points = colliderpoints;
-        EdgeCollider2D rightEdge = new GameObject("rightEdge").AddComponent<EdgeCollider2D>();
+        var rightEdgeGO = new GameObject("rightEdge");
+        if (registerCollision)
+        {
+            rightEdgeGO.AddComponent<Border>().player = Player.Left;
+            rightEdgeGO.tag = "Border";
+        }
+        var rightEdge = rightEdgeGO.AddComponent<EdgeCollider2D>();
+        if (registerCollision)
+        {
+            rightEdge.isTrigger = true;
+        }
         colliderpoints = rightEdge.points;
         colliderpoints[0] = new Vector2(rUCorner.x, rUCorner.y);
         colliderpoints[1] = new Vector2(rUCorner.x, lDCorner.y);

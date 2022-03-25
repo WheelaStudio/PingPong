@@ -7,14 +7,21 @@ public class FlatController : MonoBehaviour
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        var xCoordinate = isRight ? Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,0f)).x : Camera.main.ScreenToWorldPoint(Vector3.zero).x;
+        transform.position = new Vector2(isRight ? xCoordinate - 0.175f : xCoordinate + 0.175f, 0f);
     }
     private void FixedUpdate()
     {
         if (Input.touchCount > 0)
         {
-            var last = Input.touches[Input.touchCount - 1];
-            if (last.position.x > Screen.width / 2 && isRight || last.position.x < Screen.width / 2 && !isRight)
-                body.MovePosition(body.position + Vector2.up * last.deltaPosition.y * sensitivity);
+            foreach (var touch in Input.touches)
+            {
+                if (touch.position.x > Screen.width / 2 && isRight || touch.position.x < Screen.width / 2 && !isRight)
+                {
+                    body.MovePosition(body.position + touch.deltaPosition.y * sensitivity * Vector2.up);
+                    break;
+                }
+            }
         }
     }
 }
