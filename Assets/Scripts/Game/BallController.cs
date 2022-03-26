@@ -29,8 +29,10 @@ public class BallController : MonoBehaviour
     {
         var velocity = body.velocity;
         velocity = Vector2.ClampMagnitude(velocity, maxVelocity);
-        if (velocity.x < minXAxisVelocity && velocity.x > -minXAxisVelocity)
+        if (velocity.x < minXAxisVelocity && velocity.x > 0f)
             velocity.x = minXAxisVelocity;
+        if (velocity.x > -minXAxisVelocity && velocity.x < 0f)
+            velocity.x = -minXAxisVelocity;
         body.velocity = velocity;
     }
 }

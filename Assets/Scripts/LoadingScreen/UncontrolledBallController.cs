@@ -6,7 +6,7 @@ public class UncontrolledBallController : MonoBehaviour
     {
         collisionAudioSource = GameObject.FindObjectOfType<AudioSource>();
         GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(0, 2) == 0 ? -0.1f : 0.1f,
-            Random.Range(0, 2) == 0 ? Random.Range(-0.25f, -0.1f) : Random.Range(0.1f, 0.25f)), ForceMode2D.Impulse);
+            Random.Range(0, 2) == 0 ? Random.Range(-0.2f, -0.1f) : Random.Range(0.1f, 0.2f)), ForceMode2D.Impulse);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
