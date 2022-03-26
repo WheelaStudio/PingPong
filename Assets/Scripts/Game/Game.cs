@@ -12,7 +12,7 @@ public class Game : MonoBehaviour
     }
     private void Start()
     {
-        switch(Preferences.gameMode)
+        switch (Preferences.gameMode)
         {
             case GameMode.WithBot:
                 Instantiate(WithBot);
