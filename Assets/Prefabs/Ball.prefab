@@ -139,3 +139,4 @@ MonoBehaviour:
   collisonSoundSource: {fileID: 0}
   maxVelocity: 12
   minXAxisVelocity: 4
+  minYAxisVelocity: 4

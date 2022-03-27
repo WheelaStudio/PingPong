@@ -3,7 +3,7 @@ using System.Collections;
 public class BallController : MonoBehaviour
 {
     [SerializeField] private AudioSource collisonSoundSource;
-    [SerializeField] private float maxVelocity, minXAxisVelocity;
+    [SerializeField] private float maxVelocity, minXAxisVelocity, minYAxisVelocity;
     private Rigidbody2D body;
     private void Start()
     {
@@ -28,11 +28,15 @@ public class BallController : MonoBehaviour
     private void FixedUpdate()
     {
         var velocity = body.velocity;
-        velocity = Vector2.ClampMagnitude(velocity, maxVelocity);
         if (velocity.x < minXAxisVelocity && velocity.x > 0f)
             velocity.x = minXAxisVelocity;
         if (velocity.x > -minXAxisVelocity && velocity.x < 0f)
             velocity.x = -minXAxisVelocity;
+        if (velocity.y < minYAxisVelocity && velocity.y > 0f)
+            velocity.y = minYAxisVelocity;
+        if (velocity.y > -minYAxisVelocity && velocity.y < 0f)
+            velocity.y = -minYAxisVelocity;
+        velocity = Vector2.ClampMagnitude(velocity, maxVelocity);
         body.velocity = velocity;
     }
 }
