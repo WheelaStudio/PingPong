@@ -17,11 +17,11 @@ public class Border : MonoBehaviour
         {
             if (side == ScreenSide.Left)
             {
-                game.LeftPlayerScore++;
+                game.RightPlayerScore++;
             }
             else if(side == ScreenSide.Right)
             {
-                game.RightPlayerScore++;
+                game.LeftPlayerScore++;
             }
         }
     }

@@ -21,7 +21,7 @@ public class ScreenBordersColliderSpawner : MonoBehaviour
         var leftEdgeGO = new GameObject("leftEdge");
         if(registerCollision)
         {
-            leftEdgeGO.AddComponent<Border>().side = ScreenSide.Right;
+            leftEdgeGO.AddComponent<Border>().side = ScreenSide.Left;
             leftEdgeGO.tag = "Border";
         }
         var leftEdge = leftEdgeGO.AddComponent<EdgeCollider2D>();
@@ -36,7 +36,7 @@ public class ScreenBordersColliderSpawner : MonoBehaviour
         var rightEdgeGO = new GameObject("rightEdge");
         if (registerCollision)
         {
-            rightEdgeGO.AddComponent<Border>().side = ScreenSide.Left;
+            rightEdgeGO.AddComponent<Border>().side = ScreenSide.Right;
             rightEdgeGO.tag = "Border";
         }
         var rightEdge = rightEdgeGO.AddComponent<EdgeCollider2D>();
