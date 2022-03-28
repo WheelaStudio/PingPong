@@ -1,11 +1,11 @@
 using UnityEngine;
-public enum Player
+public enum ScreenSide
 {
     Left, Right
 }
 public class Border : MonoBehaviour
 {
-    public Player player;
+    public ScreenSide side;
     private Game game;
     private void Start()
     {
@@ -15,11 +15,11 @@ public class Border : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ball"))
         {
-            if (player == Player.Left)
+            if (side == ScreenSide.Left)
             {
                 game.LeftPlayerScore++;
             }
-            else if(player == Player.Right)
+            else if(side == ScreenSide.Right)
             {
                 game.RightPlayerScore++;
             }

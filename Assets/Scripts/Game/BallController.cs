@@ -3,9 +3,9 @@ using System.Collections;
 public class BallController : MonoBehaviour
 {
     [SerializeField] private AudioSource collisonSoundSource;
-    [SerializeField] private float maxVelocity, minXAxisVelocity, minYAxisVelocity;
+    [SerializeField] private float speed, minXAxisVelocity, minYAxisVelocity;
     private Rigidbody2D body;
-    private WaitForSeconds delay = new(1f);
+    private readonly WaitForSeconds delay = new(1f);
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -24,8 +24,8 @@ public class BallController : MonoBehaviour
     }
     private void StartMove()
     {
-        body.AddForce(new Vector2(Random.Range(0, 2) == 0 ? 0.1f : -0.1f, Random.Range(0, 2) == 0 ? Random.Range(0.1f, 0.15f) :
-            Random.Range(-0.15f, -0.1f)), ForceMode2D.Impulse);
+        body.AddForce(new Vector2(Random.Range(0, 2) == 0 ? 0.1f : -0.1f, Random.Range(0, 2) == 0 ? Random.Range(0.05f, 0.15f) :
+            Random.Range(-0.15f, -0.05f)), ForceMode2D.Impulse);
     }
     private void FixedUpdate()
     {
@@ -38,7 +38,6 @@ public class BallController : MonoBehaviour
             velocity.y = minYAxisVelocity;
         if (velocity.y > -minYAxisVelocity && velocity.y <= 0f)
             velocity.y = -minYAxisVelocity;
-        velocity = Vector2.ClampMagnitude(velocity, maxVelocity);
-        body.velocity = velocity;
+        body.velocity = velocity.normalized * speed;
     }
 }

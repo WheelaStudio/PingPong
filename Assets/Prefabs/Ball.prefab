@@ -137,6 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisonSoundSource: {fileID: 0}
-  maxVelocity: 12
-  minXAxisVelocity: 4
-  minYAxisVelocity: 4
+  speed: 12
+  minXAxisVelocity: 5
+  minYAxisVelocity: 5
