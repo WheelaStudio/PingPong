@@ -6,6 +6,7 @@ public class Game : MonoBehaviour
     [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText;
     [SerializeField] private GameObject WithBot, ForTwo, Multiplayer;
     public static Game Shared { get; private set; }
+    private BallController ballController;
     private void Awake()
     {
         Shared = this;
@@ -24,7 +25,8 @@ public class Game : MonoBehaviour
                 Instantiate(Multiplayer);
                 break;
         }
-   }
+        ballController = BallController.Shared;
+    }
     public int LeftPlayerScore
     {
         get
@@ -34,6 +36,8 @@ public class Game : MonoBehaviour
         set
         {
             leftPlayerScore = value;
+            if (leftPlayerScore % 10 == 0)
+                ballController.IncreaseSpeed();
             leftPlayerScoreText.text = leftPlayerScore.ToString();
         }
     }
@@ -46,6 +50,8 @@ public class Game : MonoBehaviour
         set
         {
             rightPlayerScore = value;
+            if (rightPlayerScore % 10 == 0)
+                ballController.IncreaseSpeed();
             rightPlayerScoreText.text = rightPlayerScore.ToString();
         }
     }

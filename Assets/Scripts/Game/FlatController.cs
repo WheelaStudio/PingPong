@@ -4,10 +4,10 @@ public class FlatController : MonoBehaviour
     private Rigidbody2D body;
     [SerializeField] private ScreenSide side;
 #if !UNITY_STANDALONE
-    private const float sensitivity = 0.005f;
+    private const float sensitivity = 0.0045f;
 #endif
 #if UNITY_STANDALONE || UNITY_EDITOR
-    private const float PCsensitivity = 0.2f;
+    private const float PCsensitivity = 0.18f;
 #endif
     private float yTopCoordinate, yBottomCoordinate;
     private void Start()

@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisonSoundSource: {fileID: 0}
-  speed: 12
   minXAxisVelocity: 5
   minYAxisVelocity: 5
+  minSpeed: 10
+  maxSpeed: 15
+  speedIncreaceCoefficient: 0.5

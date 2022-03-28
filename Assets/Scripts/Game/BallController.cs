@@ -3,11 +3,18 @@ using System.Collections;
 public class BallController : MonoBehaviour
 {
     [SerializeField] private AudioSource collisonSoundSource;
-    [SerializeField] private float speed, minXAxisVelocity, minYAxisVelocity;
+    [SerializeField] private float minXAxisVelocity, minYAxisVelocity, minSpeed, maxSpeed, speedIncreaceCoefficient;
+    private float speed;
     private Rigidbody2D body;
     private readonly WaitForSeconds delay = new(1f);
+    public static BallController Shared { get; private set; }
+    private void Awake()
+    {
+        Shared = this;
+    }
     private void Start()
     {
+        speed = minSpeed;
         body = GetComponent<Rigidbody2D>();
         StartMove();
     }
@@ -21,6 +28,10 @@ public class BallController : MonoBehaviour
         body.position = Vector2.zero;
         body.velocity = Vector2.zero;
         StartMove();
+    }
+    public void IncreaseSpeed()
+    {
+        speed = Mathf.Clamp(speed + speedIncreaceCoefficient, minSpeed, maxSpeed);
     }
     private void StartMove()
     {
