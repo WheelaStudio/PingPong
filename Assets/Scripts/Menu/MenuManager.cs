@@ -31,5 +31,9 @@ public class MenuManager : MonoBehaviourPunCallbacks
             SceneLoader.LoadScene(Scene.Game);
         }
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && modeChooser.activeSelf)
+            ToogleModeChooser(false);
+    }
 }
