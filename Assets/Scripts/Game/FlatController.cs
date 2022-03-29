@@ -4,7 +4,8 @@ public class FlatController : MonoBehaviour
     private Rigidbody2D body;
     [SerializeField] private ScreenSide side;
 #if !UNITY_STANDALONE
-    private const float sensitivity = 0.005f;
+    private const float defaultSensitivity = 0.000875f;
+    private float sensitivity;
 #endif
 #if UNITY_STANDALONE || UNITY_EDITOR
     private const float PCsensitivity = 0.2f;
@@ -16,10 +17,10 @@ public class FlatController : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+        sensitivity = defaultSensitivity * Preferences.ScreenInch;
         var width = Screen.safeArea.width;
         var xCoordinate = side == ScreenSide.Right ? mainCamera.ScreenToWorldPoint(new Vector3(width - width / screenCoefficient, 0f)).x :
             mainCamera.ScreenToWorldPoint(new Vector3(width / screenCoefficient + (Screen.width - width), 0f)).x;
-        print(xCoordinate);
         var localScale = transform.localScale;
         transform.position = new Vector2(side == ScreenSide.Right ? xCoordinate - localScale.x / 2f : xCoordinate + localScale.x / 2f, 0f);
         yTopCoordinate = mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height)).y - localScale.y / 2f;

@@ -6,7 +6,7 @@ public class ScreenBordersCollidersSpawner : MonoBehaviour
     {
         var camera = Camera.main;
         var safeArea = Screen.safeArea;
-        Vector2 lDCorner = camera.ScreenToWorldPoint(new Vector3(0f, safeArea.height, camera.nearClipPlane));
+        Vector2 lDCorner = camera.ScreenToWorldPoint(new Vector3(Screen.width - safeArea.width, safeArea.height, camera.nearClipPlane));
         Vector2 rUCorner = camera.ScreenToWorldPoint(new Vector3(safeArea.width, 0f, camera.nearClipPlane));
         Vector2[] colliderpoints;
         EdgeCollider2D upperEdge = new GameObject("upperEdge").AddComponent<EdgeCollider2D>();
