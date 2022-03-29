@@ -9,16 +9,21 @@ public class FlatController : MonoBehaviour
 #if UNITY_STANDALONE || UNITY_EDITOR
     private const float PCsensitivity = 0.2f;
 #endif
+    private const int screenCoefficient = 30;
     private float yTopCoordinate, yBottomCoordinate;
+    private Camera mainCamera;
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        var camera = Camera.main;
-        var xCoordinate = side == ScreenSide.Right ? camera.ScreenToWorldPoint(new Vector3(Screen.width, 0f)).x : camera.ScreenToWorldPoint(Vector3.zero).x;
+        mainCamera = Camera.main;
+        var width = Screen.safeArea.width;
+        var xCoordinate = side == ScreenSide.Right ? mainCamera.ScreenToWorldPoint(new Vector3(width - width / screenCoefficient, 0f)).x :
+            mainCamera.ScreenToWorldPoint(new Vector3(width / screenCoefficient + (Screen.width - width), 0f)).x;
+        print(xCoordinate);
         var localScale = transform.localScale;
-        yTopCoordinate = camera.ScreenToWorldPoint(new Vector3(0f, Screen.height)).y - localScale.y / 2f;
-        yBottomCoordinate = -yTopCoordinate;
         transform.position = new Vector2(side == ScreenSide.Right ? xCoordinate - localScale.x / 2f : xCoordinate + localScale.x / 2f, 0f);
+        yTopCoordinate = mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height)).y - localScale.y / 2f;
+        yBottomCoordinate = -yTopCoordinate;
     }
     private void FixedUpdate()
     {

@@ -1,25 +1,26 @@
 using UnityEngine;
-public class ScreenBordersColliderSpawner : MonoBehaviour
+public class ScreenBordersCollidersSpawner : MonoBehaviour
 {
     [SerializeField] private bool registerCollision;
     private void Start()
     {
         var camera = Camera.main;
-        Vector2 lDCorner = camera.ViewportToWorldPoint(new Vector3(0, 0f, camera.nearClipPlane));
-        Vector2 rUCorner = camera.ViewportToWorldPoint(new Vector3(1f, 1f, camera.nearClipPlane));
+        var safeArea = Screen.safeArea;
+        Vector2 lDCorner = camera.ScreenToWorldPoint(new Vector3(0f, safeArea.height, camera.nearClipPlane));
+        Vector2 rUCorner = camera.ScreenToWorldPoint(new Vector3(safeArea.width, 0f, camera.nearClipPlane));
         Vector2[] colliderpoints;
         EdgeCollider2D upperEdge = new GameObject("upperEdge").AddComponent<EdgeCollider2D>();
         colliderpoints = upperEdge.points;
-        colliderpoints[0] = new Vector2(lDCorner.x, rUCorner.y);
-        colliderpoints[1] = new Vector2(rUCorner.x, rUCorner.y);
+        colliderpoints[0] = new Vector2(lDCorner.x, lDCorner.y);
+        colliderpoints[1] = new Vector2(rUCorner.x, lDCorner.y);
         upperEdge.points = colliderpoints;
         EdgeCollider2D lowerEdge = new GameObject("lowerEdge").AddComponent<EdgeCollider2D>();
         colliderpoints = lowerEdge.points;
-        colliderpoints[0] = new Vector2(lDCorner.x, lDCorner.y);
-        colliderpoints[1] = new Vector2(rUCorner.x, lDCorner.y);
+        colliderpoints[0] = new Vector2(lDCorner.x, rUCorner.y);
+        colliderpoints[1] = new Vector2(rUCorner.x, rUCorner.y);
         lowerEdge.points = colliderpoints;
         var leftEdgeGO = new GameObject("leftEdge");
-        if(registerCollision)
+        if (registerCollision)
         {
             leftEdgeGO.AddComponent<Border>().side = ScreenSide.Left;
             leftEdgeGO.tag = "Border";
