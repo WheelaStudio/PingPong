@@ -1,11 +1,28 @@
-using Photon.Pun;
 using UnityEngine;
-public class MenuManager : MonoBehaviourPunCallbacks
+using UnityEngine.UI;
+using TMPro;
+using Lean.Localization;
+public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject modeChooser;
+    [SerializeField] private Slider gameUpSlider;
+    [SerializeField] private TextMeshProUGUI gameUpText;
+    private void Start()
+    {
+        gameUpSlider.value = Preferences.GameUp;
+        DisplayGameUp(Preferences.GameUp);
+    }
     public void ToogleModeChooser(bool active)
     {
         modeChooser.SetActive(active);
+    }
+    public void DisplayGameUp(float value)
+    {
+        gameUpText.text = string.Format(LeanLocalization.GetTranslationText("GameUp"), Mathf.RoundToInt(value));
+    }
+    public void SaveGameUp()
+    {
+        Preferences.GameUp = Mathf.RoundToInt(gameUpSlider.value);
     }
     public void StartGame(int gameMode)
     {

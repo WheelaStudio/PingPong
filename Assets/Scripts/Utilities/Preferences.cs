@@ -8,15 +8,33 @@ public static class Preferences
 {
     private const string SENSITIVITY_COEFFICIENT_KEY = "SENSITIVITY_COEFFICIENT";
     private const string VOLUME_KEY = "VOLUME";
+    private const string GAME_UP_KEY = "GAME_UP";
     private static float sensitivityCoefficient = 0f;
     private static float screenInch = 0f;
+    private static int gameUp = 0;
     private static bool? soundIsEnabled;
     public static GameMode gameMode;
     public static void Init()
     {
         soundIsEnabled = SoundIsEnabled;
         screenInch = ScreenInch;
+        gameUp = GameUp;
         AudioListener.volume = (bool)soundIsEnabled ? 1f : 0f;
+    }
+    public static int GameUp
+    {
+        get
+        {
+            if (gameUp == 0)
+                gameUp = PlayerPrefs.GetInt(GAME_UP_KEY, 50);
+            return gameUp;
+        }
+        set
+        {
+            gameUp = value;
+            PlayerPrefs.SetInt(GAME_UP_KEY, gameUp);
+            PlayerPrefs.Save();  
+        }
     }
     public static bool SoundIsEnabled
     {

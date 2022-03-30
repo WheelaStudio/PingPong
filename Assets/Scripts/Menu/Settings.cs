@@ -10,8 +10,7 @@ public class Settings : MonoBehaviour
     private void Start()
     {
         soundToggle.isOn = Preferences.SoundIsEnabled;
-        sensitivityCoefficientSlider.SetValueWithoutNotify(Preferences.SensitivityCoefficient);
-        DisplaySensitivityCoefficient(sensitivityCoefficientSlider.value);
+        sensitivityCoefficientSlider.value = Preferences.SensitivityCoefficient;
     }
     public void SetActive(bool value)
     {

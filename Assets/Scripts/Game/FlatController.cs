@@ -17,7 +17,13 @@ public class FlatController : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+#if! UNITY_STANDALONE
         sensitivity = defaultSensitivity * Preferences.ScreenInch * Preferences.SensitivityCoefficient;
+#endif
+#if UNITY_STANDALONE || UNITY_EDITOR
+        // sensitivity = PCsensitivity * Preferences.ScreenInch * Preferences.SensitivityCoefficient;
+#endif
+        print(Preferences.GameUp);
         var width = Screen.safeArea.width;
         var xCoordinate = side == ScreenSide.Right ? mainCamera.ScreenToWorldPoint(new Vector3(width - width / screenCoefficient, 0f)).x :
             mainCamera.ScreenToWorldPoint(new Vector3(width / screenCoefficient + (Screen.width - width), 0f)).x;
