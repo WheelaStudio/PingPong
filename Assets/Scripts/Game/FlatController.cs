@@ -10,7 +10,9 @@ public class FlatController : MonoBehaviour
 #if UNITY_STANDALONE || UNITY_EDITOR
     private const float PCsensitivity = 0.2f;
 #endif
-    private const int screenCoefficient = 10;
+    private const float defaultPauseButtonWidth = 125f;
+    private const float defaultScreenWidth = 1920f;
+    private const float screenCoefficient = 40f;
     private float yTopCoordinate, yBottomCoordinate;
     private Camera mainCamera;
     private void Start()
@@ -23,13 +25,13 @@ public class FlatController : MonoBehaviour
 #if UNITY_STANDALONE || UNITY_EDITOR
         // sensitivity = PCsensitivity * Preferences.ScreenInch * Preferences.SensitivityCoefficient;
 #endif
-        print(Preferences.GameUp);
         var width = Screen.safeArea.width;
-        var xCoordinate = side == ScreenSide.Right ? mainCamera.ScreenToWorldPoint(new Vector3(width - width / screenCoefficient, 0f)).x :
-            mainCamera.ScreenToWorldPoint(new Vector3(width / screenCoefficient + (Screen.width - width), 0f)).x;
-        var localScale = transform.localScale;
-        transform.position = new Vector2(side == ScreenSide.Right ? xCoordinate - localScale.x / 2f : xCoordinate + localScale.x / 2f, 0f);
-        yTopCoordinate = mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height)).y - localScale.y / 2f;
+        var localScaleXHalf = transform.localScale.x / 2f;
+        var pauseButtonWidth = defaultPauseButtonWidth * Screen.width / defaultScreenWidth;
+        var xCoordinate = side == ScreenSide.Right ? mainCamera.ScreenToWorldPoint(new Vector3(width - width / screenCoefficient - pauseButtonWidth, 0f)).x :
+            mainCamera.ScreenToWorldPoint(new Vector3(width / screenCoefficient + (Screen.width - width + pauseButtonWidth), 0f)).x;
+        transform.position = new Vector2(side == ScreenSide.Right ? xCoordinate - localScaleXHalf : xCoordinate + localScaleXHalf, 0f);
+        yTopCoordinate = mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height)).y - localScaleXHalf;
         yBottomCoordinate = -yTopCoordinate;
     }
     private void FixedUpdate()
