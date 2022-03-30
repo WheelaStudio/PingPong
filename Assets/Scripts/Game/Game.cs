@@ -1,9 +1,10 @@
 using UnityEngine;
 using TMPro;
+using Lean.Localization;
 public class Game : MonoBehaviour
 {
-    private int leftPlayerScore = 0, rightPlayerScore = 0;
-    [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText;
+    private int leftPlayerScore = 0, rightPlayerScore = 0, gameUp = 0;
+    [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText, gameUpText;
     [SerializeField] private GameObject WithBot, ForTwo, Multiplayer;
     public static Game Shared { get; private set; }
     private BallController ballController;
@@ -25,7 +26,9 @@ public class Game : MonoBehaviour
                 Instantiate(Multiplayer);
                 break;
         }
+        gameUp = Preferences.GameUp;
         ballController = BallController.Shared;
+        gameUpText.text = string.Format(LeanLocalization.GetTranslationText("GameUp"), gameUp);
     }
     public int LeftPlayerScore
     {

@@ -10,7 +10,7 @@ public class FlatController : MonoBehaviour
 #if UNITY_STANDALONE || UNITY_EDITOR
     private const float PCsensitivity = 0.2f;
 #endif
-    private const int screenCoefficient = 30;
+    private const int screenCoefficient = 10;
     private float yTopCoordinate, yBottomCoordinate;
     private Camera mainCamera;
     private void Start()
