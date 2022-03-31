@@ -3,18 +3,14 @@ using UnityEngine.UI;
 using TMPro;
 public class Settings : MonoBehaviour
 {
-    [SerializeField] private GameObject settingsPanel;
     [SerializeField] private Toggle soundToggle;
     [SerializeField] private TextMeshProUGUI sensitivityValueText;
     [SerializeField] private Slider sensitivityCoefficientSlider;
-    private void Start()
+    private void Awake()
     {
         soundToggle.isOn = Preferences.SoundIsEnabled;
         sensitivityCoefficientSlider.value = Preferences.SensitivityCoefficient;
-    }
-    public void SetActive(bool value)
-    {
-        settingsPanel.SetActive(value);
+        DisplaySensitivityCoefficient(Preferences.SensitivityCoefficient);
     }
     public void ToggleSound(bool isEnabled)
     {
@@ -27,10 +23,5 @@ public class Settings : MonoBehaviour
     public void SaveSensitivityCoefficient()
     {
         Preferences.SensitivityCoefficient = sensitivityCoefficientSlider.value;
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && settingsPanel.activeSelf)
-            SetActive(false);
     }
 }

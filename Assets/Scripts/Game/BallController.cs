@@ -8,13 +8,15 @@ public class BallController : MonoBehaviour
     private Rigidbody2D body;
     private readonly WaitForSeconds delay = new(1f);
     public static BallController Shared { get; private set; }
+    private const float screenHeight = 10f;
+    public float distanceBetweenFlats;
     private void Awake()
     {
         Shared = this;
     }
     private void Start()
     {
-        minSpeed = minDefaultSpeed * ((float)Screen.width / Screen.height);
+        minSpeed = minDefaultSpeed * (distanceBetweenFlats / screenHeight);
         maxSpeed = minSpeed + differenceSpeed;
         speed = minSpeed;
         body = GetComponent<Rigidbody2D>();

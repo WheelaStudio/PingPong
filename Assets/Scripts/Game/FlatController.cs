@@ -15,7 +15,7 @@ public class FlatController : MonoBehaviour
     private const float defaultScreenCoefficient = 62.5f;
     private float yTopCoordinate, yBottomCoordinate;
     private Camera mainCamera;
-    private void Start()
+    private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
@@ -32,6 +32,8 @@ public class FlatController : MonoBehaviour
         var pauseButtonWidth = defaultPauseButtonWidth * (Screen.width / defaultScreenWidth);
         var xCoordinate = side == ScreenSide.Right ? mainCamera.ScreenToWorldPoint(new Vector3(width - width / screenCoefficient - pauseButtonWidth, 0f)).x :
             mainCamera.ScreenToWorldPoint(new Vector3(width / screenCoefficient + (Screen.width - width + pauseButtonWidth), 0f)).x;
+        if (xCoordinate > 0f)
+            BallController.Shared.distanceBetweenFlats = xCoordinate * 2f;
         transform.position = new Vector2(side == ScreenSide.Right ? xCoordinate - localScaleXHalf : xCoordinate + localScaleXHalf, 0f);
         yTopCoordinate = mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height)).y - localScale.y / 2f;
         yBottomCoordinate = -yTopCoordinate;

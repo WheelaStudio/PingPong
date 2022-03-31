@@ -140,5 +140,6 @@ MonoBehaviour:
   minXAxisVelocity: 5
   minYAxisVelocity: 5
   minDefaultSpeed: 5.25
-  differenceSpeed: 3.5
+  differenceSpeed: 4.25
   speedIncreaceCoefficient: 0.5
+  distanceBetweenFlats: 0

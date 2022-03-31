@@ -12,8 +12,8 @@ public class Game : MonoBehaviour
     [HideInInspector] public GameState State { get; private set; } = GameState.Running;
     private int leftPlayerScore = 0, rightPlayerScore = 0, gameUp = 0;
     private TextMeshProUGUI resumeTimerText;
-    [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText, gameUpText;
-    [SerializeField] private GameObject WithBot, ForTwo, Multiplayer, PausePanel, PauseButton, resumeTimer;
+    [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText, gameUpText, scoreText;
+    [SerializeField] private GameObject WithBot, ForTwo, Multiplayer, pausePanel, pauseButton, resumeTimer, gameOverPanel;
     public static Game Shared { get; private set; }
     private BallController ballController;
     private QuestionDialog questionDialog;
@@ -50,7 +50,7 @@ public class Game : MonoBehaviour
             {
                 SetActive(false);
             }
-            else if (PausePanel.activeSelf)
+            else if (pausePanel.activeSelf)
             {
                 Quit();
             }
@@ -65,22 +65,29 @@ public class Game : MonoBehaviour
     {
         Time.timeScale = active ? 1f : 0f;
     }
+    private void GameOver()
+    {
+        State = GameState.Finished;
+        ToggleTime(false);
+        gameOverPanel.SetActive(true);
+        scoreText.text = string.Format(LeanLocalization.GetTranslationText("Score"), $"{leftPlayerScore}:{rightPlayerScore}");
+    }
     public void SetActive(bool active)
     {
         if (active)
         {
             IEnumerator ResumeTimer()
             {
-                PausePanel.SetActive(false);
+                pausePanel.SetActive(false);
                 resumeTimer.SetActive(true);
                 var delay = new WaitForSecondsRealtime(1f);
-                for (int i = 3; i >= 0; i--)
+                for (int i = timerSeconds; i >= 0; i--)
                 {
                     resumeTimerText.text = i.ToString();
                     yield return delay;
                 }
                 resumeTimer.SetActive(false);
-                PauseButton.SetActive(true);
+                pauseButton.SetActive(true);
                 State = GameState.Running;
                 ToggleTime(true);
             }
@@ -89,26 +96,46 @@ public class Game : MonoBehaviour
         {
             State = GameState.Paused;
             ToggleTime(false);
-            PauseButton.SetActive(false);
-            PausePanel.SetActive(true);
+            pauseButton.SetActive(false);
+            pausePanel.SetActive(true);
         }
     }
     private void HideQuestionDialog()
     {
         questionDialog.Hide();
-        PausePanel.SetActive(true);
+        pausePanel.SetActive(true);
     }
-    public void Quit()
+    public void OpenQuitDialog()
     {
-        PausePanel.SetActive(false);
+        pausePanel.SetActive(false);
         questionDialog.Show(LeanLocalization.GetTranslationText("QuitQuestion"), delegate
         {
-            ToggleTime(true);
-            SceneLoader.LoadScene(Scene.Lobby);
+            Quit();
         }, delegate
         {
             HideQuestionDialog();
         });
+    }
+    public void OpenRestartDialog()
+    {
+        pausePanel.SetActive(false);
+        questionDialog.Show(LeanLocalization.GetTranslationText("RestartQuestion"), delegate
+        {
+            Restart();
+        }, delegate
+        {
+            HideQuestionDialog();
+        });
+    }
+    public void Restart()
+    {
+        ToggleTime(true);
+        SceneLoader.LoadScene(Scene.Game);
+    }
+    public void Quit()
+    {
+        ToggleTime(true);
+        SceneLoader.LoadScene(Scene.Lobby);
     }
     public int LeftPlayerScore
     {
@@ -119,9 +146,11 @@ public class Game : MonoBehaviour
         set
         {
             leftPlayerScore = value;
+            leftPlayerScoreText.text = leftPlayerScore.ToString();
+            if (leftPlayerScore == gameUp)
+                GameOver();
             if (leftPlayerScore % 10 == 0)
                 ballController.IncreaseSpeed();
-            leftPlayerScoreText.text = leftPlayerScore.ToString();
         }
     }
     public int RightPlayerScore
@@ -133,9 +162,11 @@ public class Game : MonoBehaviour
         set
         {
             rightPlayerScore = value;
+            rightPlayerScoreText.text = rightPlayerScore.ToString();
             if (rightPlayerScore % 10 == 0)
                 ballController.IncreaseSpeed();
-            rightPlayerScoreText.text = rightPlayerScore.ToString();
+            if (rightPlayerScore % 10 == 0)
+                GameOver();
         }
     }
 }

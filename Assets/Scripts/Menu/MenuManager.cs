@@ -4,7 +4,7 @@ using TMPro;
 using Lean.Localization;
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject modeChooser;
+    [SerializeField] private GameObject modeChooser, settingsPanel;
     [SerializeField] private Slider gameUpSlider;
     [SerializeField] private TextMeshProUGUI gameUpText;
     private void Start()
@@ -12,9 +12,21 @@ public class MenuManager : MonoBehaviour
         gameUpSlider.value = Preferences.GameUp;
         DisplayGameUp(Preferences.GameUp);
     }
+    public void SetActiveSettings(bool value)
+    {
+        if (!modeChooser.activeSelf)
+        {
+            gameUpSlider.enabled = !value;
+            settingsPanel.SetActive(value);
+        }
+    }
     public void ToogleModeChooser(bool active)
     {
-        modeChooser.SetActive(active);
+        if (!settingsPanel.activeSelf)
+        {
+            gameUpSlider.enabled = !active;
+            modeChooser.SetActive(active);
+        }
     }
     public void DisplayGameUp(float value)
     {
@@ -50,7 +62,12 @@ public class MenuManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && modeChooser.activeSelf)
-            ToogleModeChooser(false);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (modeChooser.activeSelf)
+                ToogleModeChooser(false);
+            if (settingsPanel.activeSelf)
+                SetActiveSettings(false);
+        }
     }
 }
