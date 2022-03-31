@@ -12,7 +12,7 @@ public class FlatController : MonoBehaviour
 #endif
     private const float defaultPauseButtonWidth = 125f;
     private const float defaultScreenWidth = 1920f;
-    private const float screenCoefficient = 40f;
+    private const float defaultScreenCoefficient = 62.5f;
     private float yTopCoordinate, yBottomCoordinate;
     private Camera mainCamera;
     private void Start()
@@ -26,12 +26,14 @@ public class FlatController : MonoBehaviour
         // sensitivity = PCsensitivity * Preferences.ScreenInch * Preferences.SensitivityCoefficient;
 #endif
         var width = Screen.safeArea.width;
-        var localScaleXHalf = transform.localScale.x / 2f;
-        var pauseButtonWidth = defaultPauseButtonWidth * Screen.width / defaultScreenWidth;
+        var screenCoefficient = (defaultScreenCoefficient * (Screen.width / (float)Screen.height)) - defaultScreenCoefficient;
+        var localScale = transform.localScale;
+        var localScaleXHalf = localScale.x / 2f;
+        var pauseButtonWidth = defaultPauseButtonWidth * (Screen.width / defaultScreenWidth);
         var xCoordinate = side == ScreenSide.Right ? mainCamera.ScreenToWorldPoint(new Vector3(width - width / screenCoefficient - pauseButtonWidth, 0f)).x :
             mainCamera.ScreenToWorldPoint(new Vector3(width / screenCoefficient + (Screen.width - width + pauseButtonWidth), 0f)).x;
         transform.position = new Vector2(side == ScreenSide.Right ? xCoordinate - localScaleXHalf : xCoordinate + localScaleXHalf, 0f);
-        yTopCoordinate = mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height)).y - localScaleXHalf;
+        yTopCoordinate = mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height)).y - localScale.y / 2f;
         yBottomCoordinate = -yTopCoordinate;
     }
     private void FixedUpdate()

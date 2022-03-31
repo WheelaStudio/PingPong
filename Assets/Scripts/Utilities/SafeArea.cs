@@ -15,14 +15,12 @@ public class SafeArea : MonoBehaviour
         var safeArea = Screen.safeArea;
         if (safeArea != Rect.zero)
         {
-            Vector2 anchorMin = safeArea.position;
-            Vector2 anchorMax = safeArea.position + safeArea.size;
+            Vector2 anchorMin = new Vector2(safeArea.position.x, 0f);
+            Vector2 anchorMax = new Vector2(Screen.width , 1f);
             anchorMin.x /= Screen.width;
-            anchorMin.y /= Screen.height;
             anchorMax.x /= Screen.width;
-            anchorMax.y /= Screen.height;
             Panel.anchorMin = anchorMin;
-            Panel.anchorMax = isGameCanvas ?  anchorMax - anchorMin : anchorMax;
+            Panel.anchorMax = isGameCanvas ? anchorMax - anchorMin : anchorMax;
         }
     }
     private void Update()
