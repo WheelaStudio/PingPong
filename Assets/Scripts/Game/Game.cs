@@ -52,7 +52,7 @@ public class Game : MonoBehaviour
             }
             else if (pausePanel.activeSelf)
             {
-                Quit();
+                OpenQuitDialog();
             }
             else if (questionDialog.IsActive)
             {
@@ -65,8 +65,9 @@ public class Game : MonoBehaviour
     {
         Time.timeScale = active ? 1f : 0f;
     }
-    private void GameOver()
+    private IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(0.5f);
         State = GameState.Finished;
         ToggleTime(false);
         gameOverPanel.SetActive(true);
@@ -81,7 +82,7 @@ public class Game : MonoBehaviour
                 pausePanel.SetActive(false);
                 resumeTimer.SetActive(true);
                 var delay = new WaitForSecondsRealtime(1f);
-                for (int i = timerSeconds; i >= 0; i--)
+                for (int i = timerSeconds; i > 0; i--)
                 {
                     resumeTimerText.text = i.ToString();
                     yield return delay;
@@ -137,6 +138,13 @@ public class Game : MonoBehaviour
         ToggleTime(true);
         SceneLoader.LoadScene(Scene.Lobby);
     }
+    private void CheckScore(int score)
+    {
+        if (score == gameUp)
+            StartCoroutine(GameOver());
+        if (score % 10 == 0)
+            ballController.IncreaseSpeed();
+    }
     public int LeftPlayerScore
     {
         get
@@ -147,10 +155,7 @@ public class Game : MonoBehaviour
         {
             leftPlayerScore = value;
             leftPlayerScoreText.text = leftPlayerScore.ToString();
-            if (leftPlayerScore == gameUp)
-                GameOver();
-            if (leftPlayerScore % 10 == 0)
-                ballController.IncreaseSpeed();
+            CheckScore(leftPlayerScore);
         }
     }
     public int RightPlayerScore
@@ -163,10 +168,7 @@ public class Game : MonoBehaviour
         {
             rightPlayerScore = value;
             rightPlayerScoreText.text = rightPlayerScore.ToString();
-            if (rightPlayerScore % 10 == 0)
-                ballController.IncreaseSpeed();
-            if (rightPlayerScore % 10 == 0)
-                GameOver();
+            CheckScore(rightPlayerScore);
         }
     }
 }
