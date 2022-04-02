@@ -41,6 +41,11 @@ public class Game : MonoBehaviour
         ballController = BallController.Shared;
         gameUpText.text = string.Format(LeanLocalization.GetTranslationText("GameUp"), gameUp);
     }
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus && State == GameState.Running)
+            SetActive(false);
+    }
     private void Update()
     {
 #if !UNITY_IOS
@@ -93,7 +98,8 @@ public class Game : MonoBehaviour
                 ToggleTime(true);
             }
             StartCoroutine(ResumeTimer());
-        } else
+        }
+        else
         {
             State = GameState.Paused;
             ToggleTime(false);
