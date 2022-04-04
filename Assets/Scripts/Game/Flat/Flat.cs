@@ -6,7 +6,7 @@ public class Flat : MonoBehaviour
 #endif
     protected float sensitivity;
 #if UNITY_STANDALONE || UNITY_EDITOR
-    private const float PCsensitivity = 0.02f;
+     private const float PCsensitivity = 0.02f;
 #endif
     private const float defaultPauseButtonWidth = 125f;
     private const float defaultScreenWidth = 1920f;
