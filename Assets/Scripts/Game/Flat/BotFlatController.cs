@@ -3,7 +3,7 @@ public class BotFlatController : Flat
 {
     private Rigidbody2D ballBody;
     private BallController ballController;
-    private readonly (float, float) speedSpread = (0.3f, 0.7f);
+    private readonly (float, float) speedSpread = (0.325f, 0.75f);
     protected override void Awake()
     {
         screenSide = ScreenSide.Right;
