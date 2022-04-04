@@ -38,7 +38,7 @@ public class MenuManager : MonoBehaviour
     }
     public void StartGame(int gameMode)
     {
-        if (gameMode != 1)
+        if (gameMode == 2)
         {
 #if UNITY_ANDROID
             AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");

@@ -9,6 +9,7 @@ public class BallController : MonoBehaviour
     private readonly WaitForSeconds delay = new(1f);
     public static BallController Shared { get; private set; }
     private const float screenHeight = 10f;
+    public bool IsVisible { get; private set; }
     [HideInInspector] public float distanceBetweenFlats;
     private void Awake()
     {
@@ -54,5 +55,13 @@ public class BallController : MonoBehaviour
         if (velocity.y > -minYAxisVelocity && velocity.y <= 0f)
             velocity.y = -minYAxisVelocity;
         body.velocity = velocity.normalized * speed;
+    }
+    private void OnBecameInvisible()
+    {
+        IsVisible = false;
+    }
+    private void OnBecameVisible()
+    {
+        IsVisible = true;
     }
 }

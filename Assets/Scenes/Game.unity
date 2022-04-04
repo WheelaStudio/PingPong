@@ -1137,7 +1137,7 @@ MonoBehaviour:
   rightPlayerScoreText: {fileID: 787549718}
   gameUpText: {fileID: 1214384875}
   scoreText: {fileID: 200019723}
-  WithBot: {fileID: 0}
+  WithBot: {fileID: 7318054625275949946, guid: 68f10985387334b9291e948aa197cfb6, type: 3}
   ForTwo: {fileID: 7318054625275949946, guid: aaa4f11b482e24aa58a76bd04baf7f62, type: 3}
   Multiplayer: {fileID: 0}
   pausePanel: {fileID: 261591343}
