@@ -4,7 +4,7 @@ using TMPro;
 using Lean.Localization;
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject modeChooser, settingsPanel;
+    [SerializeField] private GameObject modeChooser, sideChooser, settingsPanel;
     [SerializeField] private Slider gameUpSlider;
     [SerializeField] private TextMeshProUGUI gameUpText;
     private void Start()
@@ -14,19 +14,24 @@ public class MenuManager : MonoBehaviour
     }
     public void SetActiveSettings(bool value)
     {
-        if (!modeChooser.activeSelf)
+        if (!modeChooser.activeSelf && !sideChooser.activeSelf)
         {
             gameUpSlider.enabled = !value;
             settingsPanel.SetActive(value);
         }
     }
-    public void ToogleModeChooser(bool active)
+    public void SetActiveModeChooser(bool active)
     {
-        if (!settingsPanel.activeSelf)
+        if (!settingsPanel.activeSelf && !sideChooser.activeSelf)
         {
             gameUpSlider.enabled = !active;
             modeChooser.SetActive(active);
         }
+    }
+    public void SetActiveSideChooser(bool active)
+    {
+        sideChooser.SetActive(active);
+        modeChooser.SetActive(!active);
     }
     public void DisplayGameUp(float value)
     {
@@ -35,6 +40,10 @@ public class MenuManager : MonoBehaviour
     public void SaveGameUp()
     {
         Preferences.GameUp = Mathf.RoundToInt(gameUpSlider.value);
+    }
+    public void SetSide(int side)
+    {
+        Preferences.PlayerSide = (ScreenSide)side;
     }
     public void StartGame(int gameMode)
     {
@@ -56,7 +65,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            Preferences.gameMode = (GameMode)gameMode;
+            Preferences.GameMode = (GameMode)gameMode;
             SceneLoader.LoadScene(Scene.Game);
         }
     }
@@ -65,9 +74,11 @@ public class MenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (modeChooser.activeSelf)
-                ToogleModeChooser(false);
+                SetActiveModeChooser(false);
             if (settingsPanel.activeSelf)
                 SetActiveSettings(false);
+            if (sideChooser.activeSelf)
+                SetActiveSideChooser(false);
         }
     }
 }

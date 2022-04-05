@@ -4,22 +4,24 @@ public class BallController : MonoBehaviour
 {
     [SerializeField] private AudioSource collisonSoundSource;
     [SerializeField] private float minXAxisVelocity, minYAxisVelocity, minDefaultSpeed, differenceSpeed, speedIncreaceCoefficient;
-    private float minSpeed, maxSpeed, speed;
+    private float minSpeed, maxSpeed;
+    public float Speed { get; private set; }
     private Rigidbody2D body;
     private readonly WaitForSeconds delay = new(1f);
     public static BallController Shared { get; private set; }
-    private const float screenHeight = 10f;
-    public bool IsVisible { get; private set; }
-    [HideInInspector] public float distanceBetweenFlats;
+    public bool IsOnTheField { get; private set; } = true;
+    public delegate void ExitFromTheField();
+    public event ExitFromTheField OnExitFromTheField;
+    [HideInInspector]
     private void Awake()
     {
         Shared = this;
     }
     private void Start()
     {
-        minSpeed = minDefaultSpeed * (distanceBetweenFlats / screenHeight);
+        minSpeed = minDefaultSpeed * (Preferences.DistanceBetweenFlats / Preferences.ScreenWorldHeight);
+        Speed = minSpeed;
         maxSpeed = minSpeed + differenceSpeed;
-        speed = minSpeed;
         body = GetComponent<Rigidbody2D>();
         StartMove();
     }
@@ -29,14 +31,17 @@ public class BallController : MonoBehaviour
     }
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
+        IsOnTheField = false;
+        OnExitFromTheField.Invoke();
         yield return delay;
         body.position = Vector2.zero;
         body.velocity = Vector2.zero;
+        IsOnTheField = true;
         StartMove();
     }
     public void IncreaseSpeed()
     {
-        speed = Mathf.Clamp(speed + speedIncreaceCoefficient, minSpeed, maxSpeed);
+        Speed = Mathf.Clamp(Speed + speedIncreaceCoefficient, minSpeed, maxSpeed);
     }
     private void StartMove()
     {
@@ -54,14 +59,6 @@ public class BallController : MonoBehaviour
             velocity.y = minYAxisVelocity;
         if (velocity.y > -minYAxisVelocity && velocity.y <= 0f)
             velocity.y = -minYAxisVelocity;
-        body.velocity = velocity.normalized * speed;
-    }
-    private void OnBecameInvisible()
-    {
-        IsVisible = false;
-    }
-    private void OnBecameVisible()
-    {
-        IsVisible = true;
+        body.velocity = velocity.normalized * Speed;
     }
 }

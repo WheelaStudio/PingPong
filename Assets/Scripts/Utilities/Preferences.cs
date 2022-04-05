@@ -13,7 +13,10 @@ public static class Preferences
     private static float screenInch = 0f;
     private static int gameUp = 0;
     private static bool? soundIsEnabled;
-    public static GameMode gameMode;
+    public const float ScreenWorldHeight = 10f;
+    public static GameMode GameMode;
+    public static ScreenSide PlayerSide;
+    public static float DistanceBetweenFlats;
     public static void Init()
     {
         soundIsEnabled = SoundIsEnabled;

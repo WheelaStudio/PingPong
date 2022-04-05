@@ -10,6 +10,7 @@ public class Game : MonoBehaviour
 {
     private const int timerSeconds = 3;
     [HideInInspector] public GameState State { get; private set; } = GameState.Running;
+    [HideInInspector] public GameMode Mode { get; private set; }
     private int leftPlayerScore = 0, rightPlayerScore = 0, gameUp = 0;
     private TextMeshProUGUI resumeTimerText;
     [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText, gameUpText, scoreText;
@@ -23,7 +24,8 @@ public class Game : MonoBehaviour
     }
     private void Start()
     {
-        switch (Preferences.gameMode)
+        Mode = Preferences.GameMode;
+        switch (Mode)
         {
             case GameMode.WithBot:
                 Instantiate(WithBot);
