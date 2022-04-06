@@ -77,6 +77,7 @@ public class Game : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         State = GameState.Finished;
         ToggleTime(false);
+        pauseButton.SetActive(false);
         gameOverPanel.SetActive(true);
         scoreText.text = string.Format(LeanLocalization.GetTranslationText("Score"), $"{leftPlayerScore}:{rightPlayerScore}");
     }

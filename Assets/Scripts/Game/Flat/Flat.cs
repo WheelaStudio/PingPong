@@ -29,9 +29,10 @@ public class Flat : MonoBehaviour
     {
         BallController.Shared.OnExitFromTheField += delegate
         {
-            var position = transform.position;
+            body.velocity = Vector2.zero;
+            var position = body.position;
             position.y = 0f;
-            transform.position = position;
+            body.position = position;
         };
     }
 }

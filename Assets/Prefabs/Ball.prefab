@@ -142,4 +142,3 @@ MonoBehaviour:
   minDefaultSpeed: 5.5
   differenceSpeed: 4.5
   speedIncreaceCoefficient: 0.5
-  distanceBetweenFlats: 0
