@@ -4,6 +4,7 @@ public class BallController : MonoBehaviour
 {
     [SerializeField] private AudioSource collisonSoundSource;
     [SerializeField] private float minXAxisVelocity, minYAxisVelocity, minDefaultSpeed, differenceSpeed, speedIncreaceCoefficient;
+    private TrailRenderer trailRenderer;
     private float minSpeed, maxSpeed;
     public float Speed { get; private set; }
     private Rigidbody2D body;
@@ -23,6 +24,7 @@ public class BallController : MonoBehaviour
         Speed = minSpeed;
         maxSpeed = minSpeed + differenceSpeed;
         body = GetComponent<Rigidbody2D>();
+        trailRenderer = GetComponent<TrailRenderer>();
         StartMove();
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -34,8 +36,9 @@ public class BallController : MonoBehaviour
         IsOnTheField = false;
         OnExitFromTheField.Invoke();
         yield return delay;
-        body.position = Vector2.zero;
+        transform.position = Vector2.zero;
         body.velocity = Vector2.zero;
+        trailRenderer.Clear();
         IsOnTheField = true;
         StartMove();
     }
