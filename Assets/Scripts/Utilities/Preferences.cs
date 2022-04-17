@@ -73,9 +73,9 @@ public static class Preferences
         {
             return complexity switch
             {
-                Complexity.Easy => (0.00375f, 0.03075f),
+                Complexity.Easy => (0.00475f, 0.03075f),
                 Complexity.Medium => (0.00575f, 0.03075f),
-                Complexity.Hard => (0.00775f, 0.03075f),
+                Complexity.Hard => (0.00675f, 0.03075f),
                 _ => (0f, 0f),
             };
         }
