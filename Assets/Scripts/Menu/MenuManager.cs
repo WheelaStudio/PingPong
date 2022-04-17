@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
         gameUpSlider.value = Preferences.GameUp;
         DisplayGameUp(Preferences.GameUp);
         sideButtonsBorders[(int)Preferences.PlayerSide].color = enabledColor;
-        complexityButtonsBorders[(int)Preferences.PlayerСomplexity].color = enabledColor;
+        complexityButtonsBorders[(int)Preferences.PlayerComplexity].color = enabledColor;
     }
     public void SetActiveSettings(bool value)
     {
@@ -55,8 +55,8 @@ public class MenuManager : MonoBehaviour
     }
     public void SetComplexity(int complexity)
     {
-        complexityButtonsBorders[(int)Preferences.PlayerСomplexity].color = disabledColor;
-        Preferences.PlayerСomplexity = (Сomplexity)complexity;
+        complexityButtonsBorders[(int)Preferences.PlayerComplexity].color = disabledColor;
+        Preferences.PlayerComplexity = (Complexity)complexity;
         complexityButtonsBorders[complexity].color = enabledColor;
     }
     public void StartGame(int gameMode)

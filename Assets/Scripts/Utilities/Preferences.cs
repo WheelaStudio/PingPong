@@ -4,7 +4,7 @@ public enum GameMode
 {
     WithBot, ForTwo, Multiplayer
 }
-public enum Ñomplexity
+public enum Complexity
 {
     Easy, Medium, Hard
 }
@@ -25,7 +25,7 @@ public static class Preferences
     private static bool? soundIsEnabled;
     public const float ScreenWorldHeight = 10f;
     public static GameMode GameMode;
-    private static Ñomplexity? complexity;
+    private static Complexity? complexity;
     private static ScreenSide? playerSide;
     public static float DistanceBetweenFlats;
     public static void Init()
@@ -33,7 +33,7 @@ public static class Preferences
         soundIsEnabled = SoundIsEnabled;
         screenInch = ScreenInch;
         gameUp = GameUp;
-        complexity = PlayerÑomplexity;
+        complexity = PlayerComplexity;
         playerSide = PlayerSide;
         AudioListener.volume = (bool)soundIsEnabled ? 1f : 0f;
     }
@@ -52,13 +52,13 @@ public static class Preferences
             PlayerPrefs.Save();  
         }
     }
-    public static Ñomplexity PlayerÑomplexity
+    public static Complexity PlayerComplexity
     {
         get
         {
             if (complexity == null)
-                complexity = (Ñomplexity)PlayerPrefs.GetInt(COMPLEXITY_KEY);
-            return (Ñomplexity)complexity;
+                complexity = (Complexity)PlayerPrefs.GetInt(COMPLEXITY_KEY);
+            return (Complexity)complexity;
         }
         set
         {
@@ -73,9 +73,9 @@ public static class Preferences
         {
             return complexity switch
             {
-                Ñomplexity.Easy => (0.00575f, 0.03075f),
-                Ñomplexity.Medium => (0.00675f, 0.03075f),
-                Ñomplexity.Hard => (0.00875f, 0.03075f),
+                Complexity.Easy => (0.00375f, 0.03075f),
+                Complexity.Medium => (0.00575f, 0.03075f),
+                Complexity.Hard => (0.00775f, 0.03075f),
                 _ => (0f, 0f),
             };
         }
