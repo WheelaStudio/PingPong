@@ -1,8 +1,4 @@
 using UnityEngine;
-public enum ScreenSide
-{
-    Left, Right
-}
 public class Border : MonoBehaviour
 {
     public ScreenSide side;

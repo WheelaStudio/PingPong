@@ -4,10 +4,20 @@ public enum GameMode
 {
     WithBot, ForTwo, Multiplayer
 }
+public enum Ñomplexity
+{
+    Easy, Medium, Hard
+}
+public enum ScreenSide
+{
+    Left, Right
+}
 public static class Preferences
 {
     private const string SENSITIVITY_COEFFICIENT_KEY = "SENSITIVITY_COEFFICIENT";
     private const string VOLUME_KEY = "VOLUME";
+    private const string COMPLEXITY_KEY = "COMPLEXITY";
+    private const string PLAYER_SIDE_KEY = "PLAYER_SIDE";
     private const string GAME_UP_KEY = "GAME_UP";
     private static float sensitivityCoefficient = 0f;
     private static float screenInch = 0f;
@@ -15,13 +25,16 @@ public static class Preferences
     private static bool? soundIsEnabled;
     public const float ScreenWorldHeight = 10f;
     public static GameMode GameMode;
-    public static ScreenSide PlayerSide;
+    private static Ñomplexity? complexity;
+    private static ScreenSide? playerSide;
     public static float DistanceBetweenFlats;
     public static void Init()
     {
         soundIsEnabled = SoundIsEnabled;
         screenInch = ScreenInch;
         gameUp = GameUp;
+        complexity = PlayerÑomplexity;
+        playerSide = PlayerSide;
         AudioListener.volume = (bool)soundIsEnabled ? 1f : 0f;
     }
     public static int GameUp
@@ -37,6 +50,49 @@ public static class Preferences
             gameUp = value;
             PlayerPrefs.SetInt(GAME_UP_KEY, gameUp);
             PlayerPrefs.Save();  
+        }
+    }
+    public static Ñomplexity PlayerÑomplexity
+    {
+        get
+        {
+            if (complexity == null)
+                complexity = (Ñomplexity)PlayerPrefs.GetInt(COMPLEXITY_KEY);
+            return (Ñomplexity)complexity;
+        }
+        set
+        {
+            complexity = value;
+            PlayerPrefs.SetInt(COMPLEXITY_KEY,(int)complexity);
+            PlayerPrefs.Save();
+        }
+    }
+    public static (float,float) SpeedSpread
+    {
+        get
+        {
+            return complexity switch
+            {
+                Ñomplexity.Easy => (0.00575f, 0.03075f),
+                Ñomplexity.Medium => (0.00675f, 0.03075f),
+                Ñomplexity.Hard => (0.00875f, 0.03075f),
+                _ => (0f, 0f),
+            };
+        }
+    }
+    public static ScreenSide PlayerSide
+    {
+        get
+        {
+            if (playerSide == null)
+                playerSide = (ScreenSide)PlayerPrefs.GetInt(PLAYER_SIDE_KEY);
+            return (ScreenSide)playerSide;
+        }
+        set
+        {
+            playerSide = value;
+            PlayerPrefs.SetInt(PLAYER_SIDE_KEY, (int)playerSide);
+            PlayerPrefs.Save();
         }
     }
     public static bool SoundIsEnabled

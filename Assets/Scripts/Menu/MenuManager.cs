@@ -4,17 +4,23 @@ using TMPro;
 using Lean.Localization;
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject modeChooser, sideChooser, settingsPanel;
+    private Color disabledColor = new(0.5f, 0.5f, 0.5f);
+    private Color enabledColor = Color.white;
+    [SerializeField] private Image[] sideButtonsBorders;
+    [SerializeField] private Image[] complexityButtonsBorders;
+    [SerializeField] private GameObject modeChooser, botSettingsPanel, settingsPanel;
     [SerializeField] private Slider gameUpSlider;
     [SerializeField] private TextMeshProUGUI gameUpText;
     private void Start()
     {
         gameUpSlider.value = Preferences.GameUp;
         DisplayGameUp(Preferences.GameUp);
+        sideButtonsBorders[(int)Preferences.PlayerSide].color = enabledColor;
+        complexityButtonsBorders[(int)Preferences.PlayerСomplexity].color = enabledColor;
     }
     public void SetActiveSettings(bool value)
     {
-        if (!modeChooser.activeSelf && !sideChooser.activeSelf)
+        if (!modeChooser.activeSelf && !botSettingsPanel.activeSelf)
         {
             gameUpSlider.enabled = !value;
             settingsPanel.SetActive(value);
@@ -22,15 +28,15 @@ public class MenuManager : MonoBehaviour
     }
     public void SetActiveModeChooser(bool active)
     {
-        if (!settingsPanel.activeSelf && !sideChooser.activeSelf)
+        if (!settingsPanel.activeSelf && !botSettingsPanel.activeSelf)
         {
             gameUpSlider.enabled = !active;
             modeChooser.SetActive(active);
         }
     }
-    public void SetActiveSideChooser(bool active)
+    public void SetActiveBotSettingsPanel(bool active)
     {
-        sideChooser.SetActive(active);
+        botSettingsPanel.SetActive(active);
         modeChooser.SetActive(!active);
     }
     public void DisplayGameUp(float value)
@@ -43,7 +49,15 @@ public class MenuManager : MonoBehaviour
     }
     public void SetSide(int side)
     {
+        sideButtonsBorders[(int)Preferences.PlayerSide].color = disabledColor;
         Preferences.PlayerSide = (ScreenSide)side;
+        sideButtonsBorders[side].color = enabledColor;
+    }
+    public void SetComplexity(int complexity)
+    {
+        complexityButtonsBorders[(int)Preferences.PlayerСomplexity].color = disabledColor;
+        Preferences.PlayerСomplexity = (Сomplexity)complexity;
+        complexityButtonsBorders[complexity].color = enabledColor;
     }
     public void StartGame(int gameMode)
     {
@@ -77,8 +91,8 @@ public class MenuManager : MonoBehaviour
                 SetActiveModeChooser(false);
             if (settingsPanel.activeSelf)
                 SetActiveSettings(false);
-            if (sideChooser.activeSelf)
-                SetActiveSideChooser(false);
+            if (botSettingsPanel.activeSelf)
+                SetActiveBotSettingsPanel(false);
         }
     }
 }

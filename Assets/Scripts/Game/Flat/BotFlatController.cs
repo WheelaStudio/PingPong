@@ -3,7 +3,7 @@ public class BotFlatController : Flat
 {
     private Rigidbody2D ballBody;
     private BallController ballController;
-    private (float, float) speedSpread = (0.00575f, 0.03075f);
+    private (float, float) speedSpread;
     protected override void Awake()
     {
         screenSide = Preferences.PlayerSide == ScreenSide.Left ? ScreenSide.Right : ScreenSide.Left;
@@ -13,6 +13,7 @@ public class BotFlatController : Flat
     {
         ballController = BallController.Shared;
         ballBody = ballController.GetComponent<Rigidbody2D>();
+        speedSpread = Preferences.SpeedSpread;
         if (screenSide == ScreenSide.Right)
             transform.eulerAngles = new Vector3(0f, 0f, 180f);
         base.Start();
