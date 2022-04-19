@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Lean.Localization;
-public class MenuManager : MonoBehaviour
+using Photon.Pun;
+public class MenuManager : MonoBehaviourPunCallbacks
 {
     private Color disabledColor = new(0.5f, 0.5f, 0.5f);
     private Color enabledColor = Color.white;
@@ -59,28 +60,24 @@ public class MenuManager : MonoBehaviour
         Preferences.PlayerComplexity = (Complexity)complexity;
         complexityButtonsBorders[complexity].color = enabledColor;
     }
+    public void CreateRoom()
+    {
+        PhotonNetwork.JoinRandomOrCreateRoom(roomName: null);
+    }
+    public override void OnJoinedRoom()
+    {
+        PhotonNetwork.LoadLevel("Game");
+    }
     public void StartGame(int gameMode)
     {
-        if (gameMode == 2)
+        Preferences.GameMode = (GameMode)gameMode;
+        if (gameMode != 2)
         {
-#if UNITY_ANDROID
-            AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            AndroidJavaObject unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-            if (unityActivity != null)
-            {
-                AndroidJavaClass toastClass = new AndroidJavaClass("android.widget.Toast");
-                unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
-                {
-                    AndroidJavaObject toastObject = toastClass.CallStatic<AndroidJavaObject>("makeText", unityActivity, "В разработке", 0);
-                    toastObject.Call("show");
-                }));
-            }
-#endif
+            SceneLoader.LoadScene(Scene.Game);
         }
         else
         {
-            Preferences.GameMode = (GameMode)gameMode;
-            SceneLoader.LoadScene(Scene.Game);
+            CreateRoom();
         }
     }
     private void Update()
