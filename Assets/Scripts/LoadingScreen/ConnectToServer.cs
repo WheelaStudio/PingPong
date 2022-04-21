@@ -6,7 +6,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     private IEnumerator Start()
     {
         Preferences.Init();
-        PhotonNetwork.NickName = "Player 1";
         PhotonNetwork.GameVersion = Application.version;
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();

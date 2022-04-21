@@ -5,8 +5,7 @@ using Lean.Localization;
 using Photon.Pun;
 public class MenuManager : MonoBehaviourPunCallbacks
 {
-    private Color disabledColor = new(0.5f, 0.5f, 0.5f);
-    private Color enabledColor = Color.white;
+    [SerializeField] private TMP_InputField nickNameField;
     [SerializeField] private Image[] sideButtonsBorders;
     [SerializeField] private Image[] complexityButtonsBorders;
     [SerializeField] private GameObject modeChooser, botSettingsPanel, settingsPanel;
@@ -16,8 +15,9 @@ public class MenuManager : MonoBehaviourPunCallbacks
     {
         gameUpSlider.value = Preferences.GameUp;
         DisplayGameUp(Preferences.GameUp);
-        sideButtonsBorders[(int)Preferences.PlayerSide].color = enabledColor;
-        complexityButtonsBorders[(int)Preferences.PlayerComplexity].color = enabledColor;
+        nickNameField.text = Preferences.NickName;
+        sideButtonsBorders[(int)Preferences.PlayerSide].color = Preferences.enabledColor;
+        complexityButtonsBorders[(int)Preferences.PlayerComplexity].color = Preferences.enabledColor;
     }
     public void SetActiveSettings(bool value)
     {
@@ -50,15 +50,15 @@ public class MenuManager : MonoBehaviourPunCallbacks
     }
     public void SetSide(int side)
     {
-        sideButtonsBorders[(int)Preferences.PlayerSide].color = disabledColor;
+        sideButtonsBorders[(int)Preferences.PlayerSide].color = Preferences.disabledColor;
         Preferences.PlayerSide = (ScreenSide)side;
-        sideButtonsBorders[side].color = enabledColor;
+        sideButtonsBorders[side].color = Preferences.enabledColor;
     }
     public void SetComplexity(int complexity)
     {
-        complexityButtonsBorders[(int)Preferences.PlayerComplexity].color = disabledColor;
+        complexityButtonsBorders[(int)Preferences.PlayerComplexity].color = Preferences.disabledColor;
         Preferences.PlayerComplexity = (Complexity)complexity;
-        complexityButtonsBorders[complexity].color = enabledColor;
+        complexityButtonsBorders[complexity].color = Preferences.enabledColor;
     }
     public void CreateRoom()
     {
@@ -77,6 +77,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
         }
         else
         {
+            PhotonNetwork.NickName = Preferences.NickName;
             CreateRoom();
         }
     }

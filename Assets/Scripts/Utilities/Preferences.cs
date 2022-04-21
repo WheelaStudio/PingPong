@@ -14,7 +14,10 @@ public enum ScreenSide
 }
 public static class Preferences
 {
+    public static readonly Color disabledColor = new(0.5f, 0.5f, 0.5f);
+    public static readonly Color enabledColor = Color.white;
     private const string SENSITIVITY_COEFFICIENT_KEY = "SENSITIVITY_COEFFICIENT";
+    private const string NICKNAME_KEY = "NICKNAME";
     private const string VOLUME_KEY = "VOLUME";
     private const string COMPLEXITY_KEY = "COMPLEXITY";
     private const string PLAYER_SIDE_KEY = "PLAYER_SIDE";
@@ -23,6 +26,7 @@ public static class Preferences
     private static float screenInch = 0f;
     private static int gameUp = 0;
     private static bool? soundIsEnabled;
+    private static string nickname;
     public const float ScreenWorldHeight = 10f;
     public static GameMode GameMode;
     private static Complexity? complexity;
@@ -33,9 +37,25 @@ public static class Preferences
         soundIsEnabled = SoundIsEnabled;
         screenInch = ScreenInch;
         gameUp = GameUp;
+        nickname = NickName;
         complexity = PlayerComplexity;
         playerSide = PlayerSide;
         AudioListener.volume = (bool)soundIsEnabled ? 1f : 0f;
+    }
+    public static string NickName
+    {
+        get
+        {
+            if (nickname == null)
+                nickname = PlayerPrefs.GetString(NICKNAME_KEY, "player");
+            return nickname;
+        }
+        set
+        {
+            nickname = value;
+            PlayerPrefs.SetString(NICKNAME_KEY, nickname);
+            PlayerPrefs.Save();
+        }
     }
     public static int GameUp
     {
