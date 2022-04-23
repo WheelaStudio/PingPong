@@ -5,12 +5,22 @@ using Lean.Localization;
 using Photon.Pun;
 public class MenuManager : MonoBehaviourPunCallbacks
 {
+    [Header("Nickname Settings")]
     [SerializeField] private TMP_InputField nickNameField;
-    [SerializeField] private Image[] sideButtonsBorders;
-    [SerializeField] private Image[] complexityButtonsBorders;
-    [SerializeField] private GameObject modeChooser, botSettingsPanel, settingsPanel;
+    [Header("Settings")]
     [SerializeField] private Slider gameUpSlider;
     [SerializeField] private TextMeshProUGUI gameUpText;
+    [Header("Bot mode settings")]
+    [SerializeField] private Image[] sideButtonsBorders;
+    [SerializeField] private Image[] complexityButtonsBorders;
+    [Header("Panels")]
+    [SerializeField] private GameObject modeChooser;
+    [SerializeField] private GameObject botSettingsPanel;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject multiplayerLoadingPanel;
+    [Header("Multiplayer loading panel")]
+    [SerializeField] private TextMeshProUGUI multiplayerLoadingTitle;
+    [SerializeField] private TextMeshProUGUI multiplayerLoadingBody;
     private void Start()
     {
         gameUpSlider.value = Preferences.GameUp;
@@ -40,6 +50,11 @@ public class MenuManager : MonoBehaviourPunCallbacks
         botSettingsPanel.SetActive(active);
         modeChooser.SetActive(!active);
     }
+    public void SetActiveMultiplayerLoadingPanel(bool active)
+    {
+        multiplayerLoadingPanel.SetActive(active);
+        modeChooser.SetActive(!active);
+    }
     public void DisplayGameUp(float value)
     {
         gameUpText.text = string.Format(LeanLocalization.GetTranslationText("GameUp"), Mathf.RoundToInt(value));
@@ -60,9 +75,22 @@ public class MenuManager : MonoBehaviourPunCallbacks
         Preferences.PlayerComplexity = (Complexity)complexity;
         complexityButtonsBorders[complexity].color = Preferences.enabledColor;
     }
+    private void DisplayError(string message = null)
+    {
+        multiplayerLoadingTitle.text = LeanLocalization.GetTranslationText("Error");
+        multiplayerLoadingBody.text = string.Format(LeanLocalization.GetTranslationText("ConnectionFailed"), message);
+    }
     public void CreateRoom()
     {
-        PhotonNetwork.JoinRandomOrCreateRoom(roomName: null);
+        SetActiveMultiplayerLoadingPanel(true);
+        multiplayerLoadingTitle.text = LeanLocalization.GetTranslationText("Loading");
+        multiplayerLoadingBody.text = LeanLocalization.GetTranslationText("Wait");
+        if (!PhotonNetwork.JoinRandomOrCreateRoom(roomName: null))
+            DisplayError();
+    }
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        DisplayError(message);
     }
     public override void OnJoinedRoom()
     {
