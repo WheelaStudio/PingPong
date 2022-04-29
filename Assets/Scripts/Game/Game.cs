@@ -2,14 +2,8 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using Lean.Localization;
-using Photon.Pun;
-using Photon.Realtime;
 
-public enum GameState
-{
-    Running, Paused, Finished
-}
-public class Game : MonoBehaviourPunCallbacks
+public class Game : MonoBehaviour
 {
     private const int timerSeconds = 3;
     [HideInInspector] public GameState State { get; private set; } = GameState.Running;
@@ -25,10 +19,6 @@ public class Game : MonoBehaviourPunCallbacks
     {
         Shared = this;
     }
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        print(newPlayer.NickName);
-    }
     private void Start()
     {
         Mode = Preferences.GameMode;
@@ -39,9 +29,6 @@ public class Game : MonoBehaviourPunCallbacks
                 break;
             case GameMode.ForTwo:
                 Instantiate(ForTwo);
-                break;
-            case GameMode.Multiplayer:
-                print("Multiplayer is connected");  // Instantiate(Multiplayer);
                 break;
         }
         resumeTimerText = resumeTimer.GetComponent<TextMeshProUGUI>();
