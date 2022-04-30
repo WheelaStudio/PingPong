@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 public enum Scene
 {
-    Lobby, Game
+    Menu, Game
 }
 public enum GameState
 {
@@ -26,6 +26,8 @@ public static class Preferences
     public static readonly Color enabledColor = Color.white;
     private const string SENSITIVITY_COEFFICIENT_KEY = "SENSITIVITY_COEFFICIENT";
     private const string VOLUME_KEY = "VOLUME";
+    private const string WITH_BOT_TUTORIAL_IS_VIEWED_KEY = "WITH_BOT_TUTORIAL_IS_VIEWED";
+    private const string FOR_TWO_TUTORIAL_IS_VIEWED_KEY = "FOR_TWO_TUTORIAL_IS_VIEWED";
     private const string COMPLEXITY_KEY = "COMPLEXITY";
     private const string PLAYER_SIDE_KEY = "PLAYER_SIDE";
     private const string GAME_UP_KEY = "GAME_UP";
@@ -33,6 +35,8 @@ public static class Preferences
     private static float screenInch = 0f;
     private static int gameUp = 0;
     private static bool? soundIsEnabled;
+    private static bool? withBotTutorialIsViewed;
+    private static bool? forTwoTutorialIsViewed;
     public const float ScreenWorldHeight = 10f;
     public static GameMode GameMode;
     private static Complexity? complexity;
@@ -44,6 +48,8 @@ public static class Preferences
         screenInch = ScreenInch;
         gameUp = GameUp;
         complexity = PlayerComplexity;
+        withBotTutorialIsViewed = WithBotTutorialIsViewed;
+        forTwoTutorialIsViewed = ForTwoTutorialIsViewed;
         playerSide = PlayerSide;
         AudioListener.volume = (bool)soundIsEnabled ? 1f : 0f;
     }
@@ -119,6 +125,36 @@ public static class Preferences
             var volume = (bool)soundIsEnabled ? 1f : 0f;
             AudioListener.volume = volume;
             PlayerPrefs.SetFloat(VOLUME_KEY, volume);
+            PlayerPrefs.Save();
+        }
+    }
+    public static bool ForTwoTutorialIsViewed
+    {
+        get
+        {
+            if (forTwoTutorialIsViewed == null)
+                forTwoTutorialIsViewed = Convert.ToBoolean(PlayerPrefs.GetInt(FOR_TWO_TUTORIAL_IS_VIEWED_KEY));
+            return (bool)forTwoTutorialIsViewed;
+        }
+        set
+        {
+            forTwoTutorialIsViewed = value;
+            PlayerPrefs.SetInt(FOR_TWO_TUTORIAL_IS_VIEWED_KEY, Convert.ToInt32(forTwoTutorialIsViewed));
+            PlayerPrefs.Save();
+        }
+    }
+    public static bool WithBotTutorialIsViewed
+    {
+        get
+        {
+            if (withBotTutorialIsViewed == null)
+                withBotTutorialIsViewed = Convert.ToBoolean(PlayerPrefs.GetInt(WITH_BOT_TUTORIAL_IS_VIEWED_KEY));
+            return (bool)withBotTutorialIsViewed;
+        }
+        set
+        {
+            withBotTutorialIsViewed = value;
+            PlayerPrefs.SetInt(WITH_BOT_TUTORIAL_IS_VIEWED_KEY, Convert.ToInt32(withBotTutorialIsViewed));
             PlayerPrefs.Save();
         }
     }

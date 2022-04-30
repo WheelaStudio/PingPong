@@ -10,8 +10,8 @@ public class Game : MonoBehaviour
     [HideInInspector] public GameMode Mode { get; private set; }
     private int leftPlayerScore = 0, rightPlayerScore = 0, gameUp = 0;
     private TextMeshProUGUI resumeTimerText;
-    [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText, gameUpText, scoreText;
-    [SerializeField] private GameObject WithBot, ForTwo, Multiplayer, pausePanel, pauseButton, resumeTimer, gameOverPanel;
+    [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText, gameUpText, scoreText, tutorialText;
+    [SerializeField] private GameObject WithBot, ForTwo, pausePanel, pauseButton, resumeTimer, gameOverPanel, tutorialPanel;
     public static Game Shared { get; private set; }
     private BallController ballController;
     private QuestionDialog questionDialog;
@@ -22,13 +22,28 @@ public class Game : MonoBehaviour
     private void Start()
     {
         Mode = Preferences.GameMode;
+        void DisplayTutorial()
+        {
+            Time.timeScale = 0f;
+            tutorialPanel.SetActive(true);
+        }
         switch (Mode)
         {
             case GameMode.WithBot:
                 Instantiate(WithBot);
+                tutorialText.text = LeanLocalization.GetTranslationText("WithBotTutorial");
+                if(!Preferences.WithBotTutorialIsViewed)
+                {
+                    DisplayTutorial();
+                }
                 break;
             case GameMode.ForTwo:
                 Instantiate(ForTwo);
+                tutorialText.text = LeanLocalization.GetTranslationText("ForTwoTutorial");
+                if (!Preferences.ForTwoTutorialIsViewed)
+                {
+                    DisplayTutorial();
+                }
                 break;
         }
         resumeTimerText = resumeTimer.GetComponent<TextMeshProUGUI>();
@@ -36,6 +51,20 @@ public class Game : MonoBehaviour
         questionDialog = QuestionDialog.Shared;
         ballController = BallController.Shared;
         gameUpText.text = string.Format(LeanLocalization.GetTranslationText("GameUp"), gameUp);
+    }
+    public void CloseTutorial()
+    {
+        switch (Mode)
+        {
+            case GameMode.WithBot:
+                Preferences.WithBotTutorialIsViewed = true;
+                break;
+            case GameMode.ForTwo:
+                Preferences.ForTwoTutorialIsViewed = true;
+                break;
+        }
+        tutorialPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
     private void OnApplicationFocus(bool focus)
     {
@@ -139,7 +168,7 @@ public class Game : MonoBehaviour
     public void Quit()
     {
         ToggleTime(true);
-        SceneLoader.LoadScene(Scene.Lobby);
+        SceneLoader.LoadScene(Scene.Menu);
     }
     private void CheckScore(int score)
     {
