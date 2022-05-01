@@ -22,11 +22,6 @@ public class Game : MonoBehaviour
     private void Start()
     {
         Mode = Preferences.GameMode;
-        void DisplayTutorial()
-        {
-            Time.timeScale = 0f;
-            tutorialPanel.SetActive(true);
-        }
         switch (Mode)
         {
             case GameMode.WithBot:
@@ -52,31 +47,50 @@ public class Game : MonoBehaviour
         ballController = BallController.Shared;
         gameUpText.text = string.Format(LeanLocalization.GetTranslationText("GameUp"), gameUp);
     }
+    public void DisplayTutorial()
+    {
+        if(State == GameState.Running)
+        {
+            Time.timeScale = 0f;
+            tutorialPanel.SetActive(true);
+        } else
+        {
+            pausePanel.SetActive(false);
+            tutorialPanel.SetActive(true);
+        }
+    }
     public void CloseTutorial()
     {
-        switch (Mode)
+        if (State == GameState.Running)
         {
-            case GameMode.WithBot:
-                Preferences.WithBotTutorialIsViewed = true;
-                break;
-            case GameMode.ForTwo:
-                Preferences.ForTwoTutorialIsViewed = true;
-                break;
+            switch (Mode)
+            {
+                case GameMode.WithBot:
+                    Preferences.WithBotTutorialIsViewed = true;
+                    break;
+                case GameMode.ForTwo:
+                    Preferences.ForTwoTutorialIsViewed = true;
+                    break;
+            }
+            tutorialPanel.SetActive(false);
+            Time.timeScale = 1f;
+        } else
+        {
+            tutorialPanel.SetActive(false);
+            pausePanel.SetActive(true);
         }
-        tutorialPanel.SetActive(false);
-        Time.timeScale = 1f;
     }
     private void OnApplicationFocus(bool focus)
     {
         if (!focus && State == GameState.Running)
             SetActive(false);
     }
+#if !UNITY_IOS
     private void Update()
     {
-#if !UNITY_IOS
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (State == GameState.Running)
+            if (State == GameState.Running && !tutorialPanel.activeSelf)
             {
                 SetActive(false);
             }
@@ -88,9 +102,11 @@ public class Game : MonoBehaviour
             {
                 HideQuestionDialog();
             }
+            else if (tutorialPanel.activeSelf)
+                CloseTutorial();
         }
-#endif
     }
+#endif
     private void ToggleTime(bool active)
     {
         Time.timeScale = active ? 1f : 0f;
