@@ -26,7 +26,12 @@ public class Game : MonoBehaviour
         {
             case GameMode.WithBot:
                 Instantiate(WithBot);
-                tutorialText.text = LeanLocalization.GetTranslationText("WithBotTutorial");
+#if UNITY_STANDALONE 
+                tutorialText.text = LeanLocalization.GetTranslationText("pc_WithBotTutorial");
+#endif
+#if !UNITY_STANDALONE
+                tutorialText.text = LeanLocalization.GetTranslationText("m_WithBotTutorial");
+#endif
                 if(!Preferences.WithBotTutorialIsViewed)
                 {
                     DisplayTutorial();
@@ -34,7 +39,12 @@ public class Game : MonoBehaviour
                 break;
             case GameMode.ForTwo:
                 Instantiate(ForTwo);
-                tutorialText.text = LeanLocalization.GetTranslationText("ForTwoTutorial");
+#if UNITY_STANDALONE
+                tutorialText.text = LeanLocalization.GetTranslationText("pc_ForTwoTutorial");
+#endif
+#if !UNITY_STANDALONE
+                tutorialText.text = LeanLocalization.GetTranslationText("m_ForTwoTutorial");
+#endif
                 if (!Preferences.ForTwoTutorialIsViewed)
                 {
                     DisplayTutorial();

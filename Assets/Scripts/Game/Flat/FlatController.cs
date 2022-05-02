@@ -4,10 +4,10 @@ public class FlatController : Flat
 #if !UNITY_STANDALONE && !UNITY_EDITOR
     private const float defaultSensitivity = 0.000875f;
 #endif
-    protected float sensitivity;
 #if UNITY_STANDALONE || UNITY_EDITOR
-    private const float PCsensitivity = 0.02f;
+    private const float defaultSensitivity = 0.01f;
 #endif
+    protected float sensitivity;
     [SerializeField] private ScreenSide side;
     [SerializeField] private bool useFullScreenForControl;
     protected override void Awake()
@@ -21,12 +21,7 @@ public class FlatController : Flat
         }
         else
             screenSide = side;
-#if !UNITY_STANDALONE && !UNITY_EDITOR
         sensitivity = defaultSensitivity * Preferences.ScreenInch * Preferences.SensitivityCoefficient;
-#endif
-#if UNITY_STANDALONE || UNITY_EDITOR
-        sensitivity = PCsensitivity * Preferences.ScreenInch * Preferences.SensitivityCoefficient;
-#endif
         base.Awake();
     }
     private void FixedUpdate()
@@ -49,14 +44,14 @@ public class FlatController : Flat
 #endif
 #if UNITY_STANDALONE || UNITY_EDITOR
         var direction = 0f;
-        if (side == ScreenSide.Left)
+        if (side == ScreenSide.Left || useFullScreenForControl)
         {
             if (Input.GetKey(KeyCode.W))
                 direction = 1f;
             else if (Input.GetKey(KeyCode.S))
                 direction = -1f;
         }
-        else if (side == ScreenSide.Right)
+        if (side == ScreenSide.Right || useFullScreenForControl)
         {
             if (Input.GetKey(KeyCode.UpArrow))
                 direction = 1f;

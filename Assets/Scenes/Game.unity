@@ -123,6 +123,115 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &39498110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 39498111}
+  m_Layer: 0
+  m_Name: MobileTutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &39498111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39498110}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 81125019}
+  - {fileID: 73518220}
+  m_Father: {fileID: 961326970}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &46912195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 46912196}
+  - component: {fileID: 46912197}
+  m_Layer: 0
+  m_Name: pc_WithBotTutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &46912196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46912195}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1468901447}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &46912197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46912195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: Russian
+    Text: "\u0418\u0433\u0440\u0430 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442
+      \u0441\u043E\u0431\u043E\u0439 \u043F\u0438\u043D\u0433-\u043F\u043E\u043D\u0433.\n\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435
+      \u043F\u043B\u0438\u0442\u043A\u043E\u0439 \u043E\u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043B\u044F\u0435\u0442\u0441\u044F
+      \u043A\u043D\u043E\u043F\u043A\u0430\u043C\u0438 W \u0438 S \u0438\u043B\u0438
+      \u0441\u0442\u0440\u0435\u043B\u043A\u0430\u043C\u0438 \u0432\u0432\u0435\u0440\u0445,
+      \u0432\u043D\u0438\u0437 "
+    Object: {fileID: 0}
+  - Language: English
+    Text: 'The game is a ping-pong.
+
+      Tiles are controlled by the W and S buttons
+      or the up, down arrows'
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Le jeu est un ping-pong.\nLes tuiles sont contr\xF4l\xE9es par les boutons
+      W et S ou les fl\xE8ches haut, bas"
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Das Spiel ist Ping-Pong.\r\nDie Kachelsteuerung erfolgt mit den W- und
+      S-Tasten oder den Aufw\xE4rts-, Abw\xE4rtspfeilen"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "El juego es un ping-pong. \nLas fichas se controlan con los botones W
+      y S o las flechas arriba y abajo."
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "Il gioco \xE8 un ping-pong.\nLe tessere sono controllate dai pulsanti
+      W e S o dalle frecce su, gi\xF9"
+    Object: {fileID: 0}
 --- !u!1 &73518219
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +243,7 @@ GameObject:
   - component: {fileID: 73518220}
   - component: {fileID: 73518221}
   m_Layer: 0
-  m_Name: ForTwoTutorial
+  m_Name: m_ForTwoTutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,8 +261,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 961326970}
-  m_RootOrder: 2
+  m_Father: {fileID: 39498111}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &73518221
 MonoBehaviour:
@@ -212,7 +321,7 @@ GameObject:
   - component: {fileID: 81125019}
   - component: {fileID: 81125020}
   m_Layer: 0
-  m_Name: WithBotTutorial
+  m_Name: m_WithBotTutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,8 +339,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 961326970}
-  m_RootOrder: 1
+  m_Father: {fileID: 39498111}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &81125020
 MonoBehaviour:
@@ -2970,8 +3079,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1884234545}
-  - {fileID: 81125019}
-  - {fileID: 73518220}
+  - {fileID: 39498111}
+  - {fileID: 1468901447}
   m_Father: {fileID: 1037914536}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5060,6 +5169,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418421041}
   m_CullTransparentMesh: 1
+--- !u!1 &1468901446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1468901447}
+  m_Layer: 0
+  m_Name: PCTutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1468901447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468901446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 46912196}
+  - {fileID: 2014240315}
+  m_Father: {fileID: 961326970}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1479241477
 GameObject:
   m_ObjectHideFlags: 0
@@ -6379,3 +6521,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955145148}
   m_CullTransparentMesh: 1
+--- !u!1 &2014240314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014240315}
+  - component: {fileID: 2014240316}
+  m_Layer: 0
+  m_Name: pc_ForTwoTutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2014240315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014240314}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1468901447}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2014240316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014240314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: Russian
+    Text: "\u0418\u0433\u0440\u0430 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442
+      \u0441\u043E\u0431\u043E\u0439 \u043F\u0438\u043D\u0433-\u043F\u043E\u043D\u0433.\n\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435
+      \u043B\u0435\u0432\u043E\u0439 \u043F\u043B\u0438\u0442\u043A\u043E\u0439 \u043E\u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043B\u044F\u0435\u0442\u0441\u044F
+      \u043A\u043D\u043E\u043F\u043A\u0430\u043C\u0438 W \u0438 S, \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435
+      \u043F\u0440\u0430\u0432\u043E\u0439 - \u0441\u0442\u0440\u0435\u043B\u043A\u0430\u043C\u0438
+      \u0432\u0432\u0435\u0440\u0445 \u0438 \u0432\u043D\u0438\u0437"
+    Object: {fileID: 0}
+  - Language: English
+    Text: 'The game is ping-pong.
+
+      The left tile is controlled by the W and
+      S buttons, the right tile is controlled by the up and down arrows'
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Le jeu est du ping-pong \nLa tuile de gauche est contr\xF4l\xE9e par les
+      boutons W et S, la tuile de droite est contr\xF4l\xE9e par les fl\xE8ches haut
+      et bas"
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Das Spiel ist Ping-Pong.\nDie linke Kachel wird mit den W- und S-Tasten
+      gesteuert, die rechte Kachel wird mit den Aufw\xE4rts- und Abw\xE4rtspfeilen
+      gesteuert"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "El juego es ping-pong. \nEl mosaico izquierdo se controla con los botones
+      W y S, el mosaico derecho se controla con las flechas hacia arriba y hacia
+      abajo."
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "Il gioco \xE8 ping-pong.\nLa tessera sinistra \xE8 controllata dai pulsanti
+      W e S, la tessera destra \xE8 controllata dalle frecce su e gi\xF9"
+    Object: {fileID: 0}
