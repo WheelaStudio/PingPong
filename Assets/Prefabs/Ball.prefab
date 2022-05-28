@@ -140,7 +140,7 @@ MonoBehaviour:
   collisonSoundSource: {fileID: 0}
   minXAxisVelocity: 5
   minYAxisVelocity: 5
-  minDefaultSpeed: 5.5
+  minDefaultSpeed: 5.75
   differenceSpeed: 4.5
   speedIncreaceCoefficient: 0.5
 --- !u!96 &8131345529835807040
