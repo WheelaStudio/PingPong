@@ -11,5 +11,6 @@ The game has settings for sensitivity when controlling tiles and turning on / of
 You can also set the score to which the game will go (from 10 to 100)
 ## Menu screen
 <img src="https://i.ibb.co/xmcr6qf/photo-2022-05-31-16-20-20.jpg">
+
 ## Game
 <img src="https://i.ibb.co/CHTwNrD/photo-2022-05-31-16-29-46.jpg">
