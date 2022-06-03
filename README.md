@@ -11,7 +11,7 @@ It is possible to choose a side\
 For two\
 \
 The game has settings for sensitivity when controlling tiles and turning on / off the sound\
-You can also set the score to which the game will go (from 10 to 100)\
+You can also set the score to which the game will go (from 10 to 100)
 ## Menu screen
 <img src="https://i.ibb.co/xmcr6qf/photo-2022-05-31-16-20-20.jpg">
 
