@@ -8,7 +8,8 @@ public class BallController : MonoBehaviour
     private float minSpeed, maxSpeed;
     public float Speed { get; private set; }
     private Rigidbody2D body;
-    private readonly WaitForSeconds delay = new(1f);
+    private readonly WaitForSeconds resetPositionDelay = new(1f);
+    private readonly WaitForSeconds increaseSpeedDelay = new(120f);
     public static BallController Shared { get; private set; }
     public bool IsOnTheField { get; private set; } = true;
     public delegate void ExitFromTheField();
@@ -26,25 +27,30 @@ public class BallController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         trailRenderer = GetComponent<TrailRenderer>();
         StartMove();
+        StartCoroutine(IncreaseSpeedTimer());
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collisonSoundSource.Play();
     }
+    private IEnumerator IncreaseSpeedTimer()
+    {
+        while(true)
+        {
+            yield return increaseSpeedDelay;
+            Speed = Mathf.Clamp(Speed + speedIncreaceCoefficient, minSpeed, maxSpeed);
+        }
+    }
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
         IsOnTheField = false;
         OnExitFromTheField.Invoke();
-        yield return delay;
+        yield return resetPositionDelay;
         transform.position = Vector2.zero;
         body.velocity = Vector2.zero;
         trailRenderer.Clear();
         IsOnTheField = true;
         StartMove();
-    }
-    public void IncreaseSpeed()
-    {
-        Speed = Mathf.Clamp(Speed + speedIncreaceCoefficient, minSpeed, maxSpeed);
     }
     private void StartMove()
     {

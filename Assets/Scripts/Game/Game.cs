@@ -200,8 +200,6 @@ public class Game : MonoBehaviour
     {
         if (score == gameUp)
             StartCoroutine(GameOver());
-        if (score % 10 == 0)
-            ballController.IncreaseSpeed();
     }
     public int LeftPlayerScore
     {
