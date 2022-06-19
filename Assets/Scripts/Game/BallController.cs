@@ -39,6 +39,10 @@ public class BallController : MonoBehaviour
         {
             yield return increaseSpeedDelay;
             Speed = Mathf.Clamp(Speed + speedIncreaceCoefficient, minSpeed, maxSpeed);
+            if (Speed == maxSpeed)
+            {
+                break;
+            }
         }
     }
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
