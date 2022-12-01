@@ -414,8 +414,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 752582692}
-  - {fileID: 1232022951}
   - {fileID: 787549717}
+  - {fileID: 1232022951}
   m_Father: {fileID: 1487634003}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2034,13 +2034,17 @@ MonoBehaviour:
   gameUpText: {fileID: 1214384875}
   scoreText: {fileID: 200019723}
   tutorialText: {fileID: 1947679462}
-  WithBot: {fileID: 7318054625275949946, guid: 68f10985387334b9291e948aa197cfb6, type: 3}
-  ForTwo: {fileID: 7318054625275949946, guid: aaa4f11b482e24aa58a76bd04baf7f62, type: 3}
+  WithBotCommon: {fileID: 7318054625275949946, guid: ee3428274e7ee49b6b53ab0c61e29515, type: 3}
+  ForTwoCommon: {fileID: 7318054625275949946, guid: d40d817adf8354da6974eaa0e48668a2, type: 3}
+  WithBotAtari: {fileID: 7318054625275949946, guid: 68f10985387334b9291e948aa197cfb6, type: 3}
+  ForTwoAtari: {fileID: 7318054625275949946, guid: aaa4f11b482e24aa58a76bd04baf7f62, type: 3}
   pausePanel: {fileID: 261591343}
   pauseButton: {fileID: 1232022950}
   resumeTimer: {fileID: 1208965935}
   gameOverPanel: {fileID: 449395936}
   tutorialPanel: {fileID: 1418421041}
+  common: {fileID: 11400000, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
+  atari: {fileID: 11400000, guid: 1322de254bea344549c0f14ab9da444a, type: 2}
 --- !u!1 &752582691
 GameObject:
   m_ObjectHideFlags: 0
@@ -5564,6 +5568,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

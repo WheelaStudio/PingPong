@@ -20,10 +20,15 @@ public enum ScreenSide
 {
     Left, Right
 }
+public enum GameDesign
+{
+    Common, Atari
+}
 public static class Preferences
 {
     public static readonly Color disabledColor = new(0.5f, 0.5f, 0.5f);
     public static readonly Color enabledColor = Color.white;
+    private const string GAME_DESIGN_KEY = "GAME_DESIGN";
     private const string SENSITIVITY_COEFFICIENT_KEY = "SENSITIVITY_COEFFICIENT";
     private const string VOLUME_KEY = "VOLUME";
     private const string WITH_BOT_TUTORIAL_IS_VIEWED_KEY = "WITH_BOT_TUTORIAL_IS_VIEWED";
@@ -40,6 +45,7 @@ public static class Preferences
     public const float ScreenWorldHeight = 10f;
     public static GameMode GameMode;
     private static Complexity? complexity;
+    private static GameDesign? gameDesign;
     private static ScreenSide? playerSide;
     public static float DistanceBetweenFlats;
     public static void Init()
@@ -48,6 +54,7 @@ public static class Preferences
         screenInch = ScreenInch;
         gameUp = GameUp;
         complexity = PlayerComplexity;
+        gameDesign = CurrentGameDesign;
         withBotTutorialIsViewed = WithBotTutorialIsViewed;
         forTwoTutorialIsViewed = ForTwoTutorialIsViewed;
         playerSide = PlayerSide;
@@ -66,6 +73,21 @@ public static class Preferences
             gameUp = value;
             PlayerPrefs.SetInt(GAME_UP_KEY, gameUp);
             PlayerPrefs.Save();  
+        }
+    }
+    public static GameDesign CurrentGameDesign
+    {
+        get
+        {
+            if (gameDesign == null)
+                gameDesign = (GameDesign)PlayerPrefs.GetInt(GAME_DESIGN_KEY);
+            return (GameDesign)gameDesign;
+        }
+        set
+        {
+            gameDesign = value;
+            PlayerPrefs.SetInt(GAME_DESIGN_KEY, (int)gameDesign);
+            PlayerPrefs.Save();
         }
     }
     public static Complexity PlayerComplexity

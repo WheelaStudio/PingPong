@@ -26,6 +26,8 @@ public class BallController : MonoBehaviour
         maxSpeed = minSpeed + differenceSpeed;
         body = GetComponent<Rigidbody2D>();
         trailRenderer = GetComponent<TrailRenderer>();
+        if (Preferences.CurrentGameDesign == GameDesign.Atari)
+            Destroy(trailRenderer);
         StartMove();
         StartCoroutine(IncreaseSpeedTimer());
     }
@@ -52,7 +54,8 @@ public class BallController : MonoBehaviour
         yield return resetPositionDelay;
         transform.position = Vector2.zero;
         body.velocity = Vector2.zero;
-        trailRenderer.Clear();
+        if (Preferences.CurrentGameDesign == GameDesign.Common)
+            trailRenderer.Clear();
         IsOnTheField = true;
         StartMove();
     }

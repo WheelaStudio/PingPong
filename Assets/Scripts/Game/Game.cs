@@ -11,9 +11,10 @@ public class Game : MonoBehaviour
     private int leftPlayerScore = 0, rightPlayerScore = 0, gameUp = 0;
     private TextMeshProUGUI resumeTimerText;
     [SerializeField] private TextMeshProUGUI leftPlayerScoreText, rightPlayerScoreText, gameUpText, scoreText, tutorialText;
-    [SerializeField] private GameObject WithBot, ForTwo, pausePanel, pauseButton, resumeTimer, gameOverPanel, tutorialPanel;
+    [SerializeField] private GameObject WithBotCommon, ForTwoCommon,
+        WithBotAtari, ForTwoAtari, pausePanel, pauseButton, resumeTimer, gameOverPanel, tutorialPanel;
+    [SerializeField] private TMP_FontAsset common, atari;
     public static Game Shared { get; private set; }
-    private BallController ballController;
     private QuestionDialog questionDialog;
     private void Awake()
     {
@@ -22,10 +23,11 @@ public class Game : MonoBehaviour
     private void Start()
     {
         Mode = Preferences.GameMode;
+        var gameDesign = Preferences.CurrentGameDesign;
         switch (Mode)
         {
             case GameMode.WithBot:
-                Instantiate(WithBot);
+                Instantiate(gameDesign == GameDesign.Common ? WithBotCommon : WithBotAtari);
 #if UNITY_STANDALONE 
                 tutorialText.text = LeanLocalization.GetTranslationText("pc_WithBotTutorial");
 #endif
@@ -38,7 +40,7 @@ public class Game : MonoBehaviour
                 }
                 break;
             case GameMode.ForTwo:
-                Instantiate(ForTwo);
+                Instantiate(gameDesign == GameDesign.Common ? ForTwoCommon : ForTwoAtari);
 #if UNITY_STANDALONE
                 tutorialText.text = LeanLocalization.GetTranslationText("pc_ForTwoTutorial");
 #endif
@@ -51,10 +53,24 @@ public class Game : MonoBehaviour
                 }
                 break;
         }
+        switch(gameDesign)
+        {
+            case GameDesign.Common:
+                leftPlayerScoreText.font = common;
+                leftPlayerScoreText.fontMaterial = common.material;
+                rightPlayerScoreText.font = common;
+                rightPlayerScoreText.fontMaterial = common.material;
+                break;
+            case GameDesign.Atari:
+                leftPlayerScoreText.font = atari;
+                leftPlayerScoreText.fontMaterial = atari.material;
+                rightPlayerScoreText.font = atari;
+                rightPlayerScoreText.fontMaterial = atari.material;
+                break;
+        }
         resumeTimerText = resumeTimer.GetComponent<TextMeshProUGUI>();
         gameUp = Preferences.GameUp;
         questionDialog = QuestionDialog.Shared;
-        ballController = BallController.Shared;
         gameUpText.text = string.Format(LeanLocalization.GetTranslationText("GameUp"), gameUp);
     }
     public void DisplayTutorial()

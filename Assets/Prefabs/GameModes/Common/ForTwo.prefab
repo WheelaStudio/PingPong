@@ -112,7 +112,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7318054626145731953}
+  - {fileID: 8529548549265184594}
   - {fileID: 7318054625309683928}
   - {fileID: 7318054625457022184}
   - {fileID: 7318054624562486977}
@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   side: 0
+  useFullScreenForControl: 0
 --- !u!50 &7318054625309683932
 Rigidbody2D:
   serializedVersion: 4
@@ -363,6 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   side: 1
+  useFullScreenForControl: 0
 --- !u!50 &7318054625457022180
 Rigidbody2D:
   serializedVersion: 4
@@ -534,11 +536,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1001 &8678989651851860264
+--- !u!1001 &7755215896257202955
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 7318054625275949947}
     m_Modifications:
     - target: {fileID: 2161451783618681925, guid: a237d295d9cc04b5a95942c347e501a2, type: 3}
@@ -594,9 +597,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7318054625883715296}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a237d295d9cc04b5a95942c347e501a2, type: 3}
---- !u!4 &7318054626145731953 stripped
+--- !u!4 &8529548549265184594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2161451783618681945, guid: a237d295d9cc04b5a95942c347e501a2, type: 3}
-  m_PrefabInstance: {fileID: 8678989651851860264}
+  m_PrefabInstance: {fileID: 7755215896257202955}
   m_PrefabAsset: {fileID: 0}
