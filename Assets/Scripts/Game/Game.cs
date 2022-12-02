@@ -53,22 +53,16 @@ public class Game : MonoBehaviour
                 }
                 break;
         }
-        switch(gameDesign)
-        {
-            case GameDesign.Common:
-                leftPlayerScoreText.font = common;
-                leftPlayerScoreText.fontMaterial = common.material;
-                rightPlayerScoreText.font = common;
-                rightPlayerScoreText.fontMaterial = common.material;
-                break;
-            case GameDesign.Atari:
-                leftPlayerScoreText.font = atari;
-                leftPlayerScoreText.fontMaterial = atari.material;
-                rightPlayerScoreText.font = atari;
-                rightPlayerScoreText.fontMaterial = atari.material;
-                break;
-        }
         resumeTimerText = resumeTimer.GetComponent<TextMeshProUGUI>();
+        if (gameDesign == GameDesign.Atari)
+        {
+            leftPlayerScoreText.font = atari;
+            leftPlayerScoreText.fontMaterial = atari.material;
+            rightPlayerScoreText.font = atari;
+            rightPlayerScoreText.fontMaterial = atari.material;
+            resumeTimerText.font = atari;
+            resumeTimerText.fontMaterial = atari.material;
+        }
         gameUp = Preferences.GameUp;
         questionDialog = QuestionDialog.Shared;
         gameUpText.text = string.Format(LeanLocalization.GetTranslationText("GameUp"), gameUp);

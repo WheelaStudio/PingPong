@@ -2044,7 +2044,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 449395936}
   tutorialPanel: {fileID: 1418421041}
   common: {fileID: 11400000, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
-  atari: {fileID: 11400000, guid: 1322de254bea344549c0f14ab9da444a, type: 2}
+  atari: {fileID: 11400000, guid: c88f0147422e04f9aa01939aaf5fa9bc, type: 2}
 --- !u!1 &752582691
 GameObject:
   m_ObjectHideFlags: 0

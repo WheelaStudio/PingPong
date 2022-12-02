@@ -35,7 +35,6 @@ public class Settings : MonoBehaviour
             return;
         SetDesignButtonTexts(newGameDesignIndex);
         Preferences.CurrentGameDesign = (GameDesign)newGameDesignIndex;
-        print(Preferences.CurrentGameDesign);
     }
     private void SetDesignButtonTexts(int designIndex)
     {

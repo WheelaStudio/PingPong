@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5bca7fd43622c4a7cab4144bb04ac559
+guid: 2ff9f522c62644b928811b048b68ecbe
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - 6809 Chargen
+  - Pong Score
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
