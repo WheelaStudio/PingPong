@@ -32,6 +32,7 @@ public static class Preferences
     private const string SENSITIVITY_COEFFICIENT_KEY = "SENSITIVITY_COEFFICIENT";
     private const string VOLUME_KEY = "VOLUME";
     private const string WITH_BOT_TUTORIAL_IS_VIEWED_KEY = "WITH_BOT_TUTORIAL_IS_VIEWED";
+    private const string UPDATE_PANEL_IS_SHOWED_KEY = "UPDATE_PANEL_IS_SHOWED";
     private const string FOR_TWO_TUTORIAL_IS_VIEWED_KEY = "FOR_TWO_TUTORIAL_IS_VIEWED";
     private const string COMPLEXITY_KEY = "COMPLEXITY";
     private const string PLAYER_SIDE_KEY = "PLAYER_SIDE";
@@ -40,6 +41,7 @@ public static class Preferences
     private static float screenInch = 0f;
     private static int gameUp = 0;
     private static bool? soundIsEnabled;
+    private static bool? updatePanelIsShowed;
     private static bool? withBotTutorialIsViewed;
     private static bool? forTwoTutorialIsViewed;
     public const float ScreenWorldHeight = 10f;
@@ -147,6 +149,21 @@ public static class Preferences
             var volume = (bool)soundIsEnabled ? 1f : 0f;
             AudioListener.volume = volume;
             PlayerPrefs.SetFloat(VOLUME_KEY, volume);
+            PlayerPrefs.Save();
+        }
+    }
+    public static bool UpdatePanelIsShowed
+    {
+        get
+        {
+            if (updatePanelIsShowed == null)
+                updatePanelIsShowed = Convert.ToBoolean(PlayerPrefs.GetInt(UPDATE_PANEL_IS_SHOWED_KEY));
+            return (bool)updatePanelIsShowed;
+        }
+        set
+        {
+            updatePanelIsShowed = value;
+            PlayerPrefs.SetInt(UPDATE_PANEL_IS_SHOWED_KEY, Convert.ToInt32((bool)updatePanelIsShowed));
             PlayerPrefs.Save();
         }
     }

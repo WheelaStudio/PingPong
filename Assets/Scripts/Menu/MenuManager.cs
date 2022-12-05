@@ -6,7 +6,7 @@ public class MenuManager : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Slider gameUpSlider;
-    [SerializeField] private TextMeshProUGUI gameUpText;
+    [SerializeField] private TextMeshProUGUI gameUpText, versionText;
     [Header("Bot mode settings")]
     [SerializeField] private Image[] sideButtonsBorders;
     [SerializeField] private Image[] complexityButtonsBorders;
@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject modeChooser;
     [SerializeField] private GameObject botSettingsPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject updatesPanel;
     private void Awake()
     {
         Preferences.Init();
@@ -24,10 +25,15 @@ public class MenuManager : MonoBehaviour
         DisplayGameUp(Preferences.GameUp);
         sideButtonsBorders[(int)Preferences.PlayerSide].color = Preferences.enabledColor;
         complexityButtonsBorders[(int)Preferences.PlayerComplexity].color = Preferences.enabledColor;
+        versionText.text = string.Format(LeanLocalization.GetTranslationText("Version"), Application.version);
+        if (!Preferences.UpdatePanelIsShowed)
+        {
+            SetActiveUpdatePanel(true);
+        }
     }
     public void SetActiveSettings(bool value)
     {
-        if (!modeChooser.activeSelf && !botSettingsPanel.activeSelf)
+        if (!modeChooser.activeSelf && !botSettingsPanel.activeSelf && !updatesPanel.activeSelf)
         {
             gameUpSlider.enabled = !value;
             settingsPanel.SetActive(value);
@@ -35,10 +41,28 @@ public class MenuManager : MonoBehaviour
     }
     public void SetActiveModeChooser(bool active)
     {
-        if (!settingsPanel.activeSelf && !botSettingsPanel.activeSelf)
+        if (!settingsPanel.activeSelf && !botSettingsPanel.activeSelf && !updatesPanel.activeSelf)
         {
             gameUpSlider.enabled = !active;
             modeChooser.SetActive(active);
+        }
+    }
+    public void SetActiveUpdatePanel(bool active)
+    {
+        if (!settingsPanel.activeSelf && !botSettingsPanel.activeSelf && !modeChooser.activeSelf)
+        {
+            if (active)
+            {
+                gameUpSlider.enabled = false;
+                updatesPanel.SetActive(true);
+            }
+            else
+            {
+                if (!Preferences.UpdatePanelIsShowed)
+                    Preferences.UpdatePanelIsShowed = true;
+                gameUpSlider.enabled = true;
+                updatesPanel.SetActive(false);
+            }
         }
     }
     public void SetActiveBotSettingsPanel(bool active)
@@ -81,6 +105,8 @@ public class MenuManager : MonoBehaviour
                 SetActiveSettings(false);
             if (botSettingsPanel.activeSelf)
                 SetActiveBotSettingsPanel(false);
+            if (updatesPanel.activeSelf)
+                SetActiveUpdatePanel(false);
         }
     }
 }
