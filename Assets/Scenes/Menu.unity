@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806f0696300aeac44a0e17efee222854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLanguage: French
+  currentLanguage: Russian
   detectLanguage: 1
   defaultLanguage: English
   saveLoad: 1
@@ -3878,7 +3878,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Param\xE8tres de jeu"
+  m_text: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0438\u0433\u0440\u044B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
   m_sharedMaterial: {fileID: 3169551433852974065, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
@@ -4444,7 +4444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jouer
+  m_text: "\u0418\u0433\u0440\u0430\u0442\u044C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
   m_sharedMaterial: {fileID: 3169551433852974065, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
@@ -9886,37 +9886,30 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Russian
-    Text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435
-      \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u0442\u0435\u043C\u044B \u043E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u044F
-      \u0438\u0433\u0440\u044B! \n\u0412 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445
-      \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435
-      \u0442\u0435\u043C\u044B \u043E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u044F:
-      \u043E\u0431\u044B\u0447\u043D\u0430\u044F \u0438 \u0432 \u0441\u0442\u0438\u043B\u0435
-      Atari!\n\n\n\n"
+    Text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0437\u0432\u0443\u043A\u0438
+      \u0432 \u0441\u0442\u0438\u043B\u0438\u0441\u0442\u043A\u0435 Atari: \u0442\u0435\u043F\u0435\u0440\u044C
+      \u043F\u0440\u0438 \u0438\u0433\u0440\u0435 \u0441 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0439
+      \u0442\u0435\u043C\u043E\u0439 Atari \u0438\u0433\u0440\u0430\u044E\u0442 \u043E\u043D\u0438!"
     Object: {fileID: 0}
   - Language: English
-    Text: 'Now you can choose themes for the game!
-
-      The following themes are
-      available in the settings: regular and Atari-style!'
+    Text: 'Added sounds in Atari style: they now play when playing with the selected
+      Atari theme!'
     Object: {fileID: 0}
   - Language: French
-    Text: "Vous pouvez maintenant choisir des th\xE8mes pour le jeu\_!\nLes th\xE8mes
-      suivants sont disponibles dans les param\xE8tres : normal et style Atari !"
+    Text: "Ajout de sons dans le style Atari\_: ils jouent d\xE9sormais lors de la
+      lecture avec le th\xE8me Atari s\xE9lectionn\xE9\_!"
     Object: {fileID: 0}
   - Language: German
-    Text: "Jetzt k\xF6nnen Sie Themen f\xFCr das Spiel ausw\xE4hlen!\nDie folgenden
-      Themen sind in den Einstellungen verf\xFCgbar: normal und im Atari-Stil!"
+    Text: "Sounds im Atari-Stil hinzugef\xFCgt: Sie werden jetzt abgespielt, wenn
+      mit dem ausgew\xE4hlten Atari-Theme gespielt wird!"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "\xA1Ahora puedes elegir temas para el juego!\nLos siguientes temas est\xE1n
-      disponibles en la configuraci\xF3n: \xA1normal y estilo Atari!"
+    Text: "Se agregaron sonidos en estilo Atari: \xA1ahora suenan cuando se juega
+      con el tema Atari seleccionado!"
     Object: {fileID: 0}
   - Language: Italian
-    Text: 'Ora puoi scegliere i temi per il gioco!
-
-      I seguenti temi sono disponibili
-      nelle impostazioni: normale e in stile Atari!'
+    Text: 'Aggiunti suoni in stile Atari: ora vengono riprodotti quando si gioca
+      con il tema Atari selezionato!'
     Object: {fileID: 0}
 --- !u!1 &1658926008
 GameObject:
@@ -10837,7 +10830,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "R\xE9glages"
+  m_text: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
   m_sharedMaterial: {fileID: 3169551433852974065, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
@@ -10864,7 +10857,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 92.65
+  m_fontSize: 75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11484,7 +11477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quoi de neuf?
+  m_text: "\u0427\u0442\u043E \u043D\u043E\u0432\u043E\u0433\u043E?\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}
   m_sharedMaterial: {fileID: 3169551433852974065, guid: 1630f4ee577a14a5db2b9f3bb3f406d1, type: 2}

@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 708393242167435567}
   m_Layer: 0
   m_Name: LeftFlat
-  m_TagString: Untagged
+  m_TagString: Flat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 5143077045584517694}
   m_Layer: 0
   m_Name: RightFlat
-  m_TagString: Untagged
+  m_TagString: Flat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -594,6 +594,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2161451783618681950, guid: a237d295d9cc04b5a95942c347e501a2, type: 3}
       propertyPath: collisonSoundSource
+      value: 
+      objectReference: {fileID: 7318054625883715296}
+    - target: {fileID: 2161451783618681950, guid: a237d295d9cc04b5a95942c347e501a2, type: 3}
+      propertyPath: commonCollisonSound
       value: 
       objectReference: {fileID: 7318054625883715296}
     m_RemovedComponents: []

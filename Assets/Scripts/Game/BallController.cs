@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 public class BallController : MonoBehaviour
 {
-    [SerializeField] private AudioSource collisonSoundSource;
+    [SerializeField] private AudioSource commonCollisonSound, atariBeep, atariPeep, atariPlop;
     [SerializeField] private float minXAxisVelocity, minYAxisVelocity, minDefaultSpeed, differenceSpeed, speedIncreaceCoefficient;
     private TrailRenderer trailRenderer;
     private float minSpeed, maxSpeed;
@@ -33,7 +33,16 @@ public class BallController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collisonSoundSource.Play();
+        if(Preferences.CurrentGameDesign == GameDesign.Common)
+            commonCollisonSound.Play();
+        else
+        {
+            var collGameobject = collision.gameObject;
+            if (collGameobject.CompareTag("Flat"))
+                atariBeep.Play();
+            else if (collGameobject.CompareTag("Border"))
+                atariPlop.Play();
+        }
     }
     private IEnumerator IncreaseSpeedTimer()
     {
@@ -49,6 +58,8 @@ public class BallController : MonoBehaviour
     }
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
+        if (Preferences.CurrentGameDesign == GameDesign.Atari)
+            atariPeep.Play();
         IsOnTheField = false;
         OnExitFromTheField.Invoke();
         yield return resetPositionDelay;

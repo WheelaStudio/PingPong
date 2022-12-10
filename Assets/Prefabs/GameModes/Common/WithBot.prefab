@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 708393242167435567}
   m_Layer: 0
   m_Name: PlayerFlat
-  m_TagString: Untagged
+  m_TagString: Flat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 1361769516132452790}
   m_Layer: 0
   m_Name: BotFlat
-  m_TagString: Untagged
+  m_TagString: Flat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -539,6 +539,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 7318054625275949947}
     m_Modifications:
     - target: {fileID: 2161451783618681925, guid: a237d295d9cc04b5a95942c347e501a2, type: 3}
@@ -593,7 +594,12 @@ PrefabInstance:
       propertyPath: collisonSoundSource
       value: 
       objectReference: {fileID: 7318054625883715296}
+    - target: {fileID: 2161451783618681950, guid: a237d295d9cc04b5a95942c347e501a2, type: 3}
+      propertyPath: commonCollisonSound
+      value: 
+      objectReference: {fileID: 7318054625883715296}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a237d295d9cc04b5a95942c347e501a2, type: 3}
 --- !u!4 &7318054626145731953 stripped
 Transform:
