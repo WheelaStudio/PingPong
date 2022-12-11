@@ -74,7 +74,7 @@ public static class Preferences
         {
             gameUp = value;
             PlayerPrefs.SetInt(GAME_UP_KEY, gameUp);
-            PlayerPrefs.Save();  
+            PlayerPrefs.Save();
         }
     }
     public static GameDesign CurrentGameDesign
@@ -103,11 +103,11 @@ public static class Preferences
         set
         {
             complexity = value;
-            PlayerPrefs.SetInt(COMPLEXITY_KEY,(int)complexity);
+            PlayerPrefs.SetInt(COMPLEXITY_KEY, (int)complexity);
             PlayerPrefs.Save();
         }
     }
-    public static (float,float) SpeedSpread
+    public static (float, float) SpeedSpread
     {
         get
         {
@@ -157,13 +157,26 @@ public static class Preferences
         get
         {
             if (updatePanelIsShowed == null)
-                updatePanelIsShowed = Convert.ToBoolean(PlayerPrefs.GetInt(UPDATE_PANEL_IS_SHOWED_KEY));
+            {
+                var strRes = PlayerPrefs.GetString(UPDATE_PANEL_IS_SHOWED_KEY);
+                if (strRes == "")
+                    updatePanelIsShowed = false;
+                else
+                {
+                    var strResArray = strRes.Split(",version=");
+                    var version = strResArray[1];
+                    if (version != Application.version)
+                        updatePanelIsShowed = false;
+                    else
+                        updatePanelIsShowed = Convert.ToBoolean(strResArray[0]);
+                }
+            }
             return (bool)updatePanelIsShowed;
         }
         set
-        {
+        {  
             updatePanelIsShowed = value;
-            PlayerPrefs.SetInt(UPDATE_PANEL_IS_SHOWED_KEY, Convert.ToInt32((bool)updatePanelIsShowed));
+            PlayerPrefs.SetString(UPDATE_PANEL_IS_SHOWED_KEY, $"{updatePanelIsShowed},version={Application.version}");
             PlayerPrefs.Save();
         }
     }
