@@ -1,15 +1,20 @@
 using UnityEngine;
 using System.Collections;
+
 public class BallController : MonoBehaviour
 {
+    private const float MINIMUM_BALL_SPEED_FACTOR = 0.95f;
+    private const float POSITION_DIFFERENCE_COEFFICIENT = 0.2f;
     [SerializeField] private AudioSource commonCollisonSound, atariBeep, atariPeep, atariPlop;
     [SerializeField] private float minXAxisVelocity, minYAxisVelocity, minDefaultSpeed, differenceSpeed, speedIncreaceCoefficient;
+    private float movementSpeed;
     private TrailRenderer trailRenderer;
     private float minSpeed, maxSpeed;
     public float Speed { get; private set; }
+    public float SpeedCoefficient { get; private set; } = 1f;
     private Rigidbody2D body;
     private readonly WaitForSeconds resetPositionDelay = new(1f);
-    private readonly WaitForSeconds increaseSpeedDelay = new(120f);
+    private readonly WaitForSeconds increaseSpeedDelay = new(90f);
     public static BallController Shared { get; private set; }
     public bool IsOnTheField { get; private set; } = true;
     public delegate void ExitFromTheField();
@@ -23,6 +28,7 @@ public class BallController : MonoBehaviour
     {
         minSpeed = minDefaultSpeed * (Preferences.DistanceBetweenFlats / Preferences.ScreenWorldHeight);
         Speed = minSpeed;
+        movementSpeed = Speed;
         maxSpeed = minSpeed + differenceSpeed;
         body = GetComponent<Rigidbody2D>();
         trailRenderer = GetComponent<TrailRenderer>();
@@ -33,12 +39,20 @@ public class BallController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(Preferences.CurrentGameDesign == GameDesign.Common)
+        var collGameobject = collision.gameObject;
+        var is_Flat = collGameobject.CompareTag("Flat");
+        if (is_Flat)
+        {
+            SpeedCoefficient = MINIMUM_BALL_SPEED_FACTOR + Mathf.Abs(Mathf.Abs(transform.position.y) -
+                Mathf.Abs(collGameobject.transform.position.y)) * POSITION_DIFFERENCE_COEFFICIENT;
+            movementSpeed =
+               SpeedCoefficient * Speed;
+        }
+        if (Preferences.CurrentGameDesign == GameDesign.Common)
             commonCollisonSound.Play();
         else
         {
-            var collGameobject = collision.gameObject;
-            if (collGameobject.CompareTag("Flat"))
+            if (is_Flat)
                 atariBeep.Play();
             else if (collGameobject.CompareTag("Border"))
                 atariPlop.Play();
@@ -63,6 +77,7 @@ public class BallController : MonoBehaviour
         IsOnTheField = false;
         OnExitFromTheField.Invoke();
         yield return resetPositionDelay;
+        movementSpeed = Speed;
         transform.position = Vector2.zero;
         body.velocity = Vector2.zero;
         if (Preferences.CurrentGameDesign == GameDesign.Common)
@@ -86,6 +101,6 @@ public class BallController : MonoBehaviour
             velocity.y = minYAxisVelocity;
         if (velocity.y > -minYAxisVelocity && velocity.y <= 0f)
             velocity.y = -minYAxisVelocity;
-        body.velocity = velocity.normalized * Speed;
+        body.velocity = velocity.normalized * movementSpeed;
     }
 }

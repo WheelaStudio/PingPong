@@ -22,7 +22,8 @@ public class BotFlatController : Flat
     {
         if (!ballController.IsOnTheField) return;
         var newPosition = body.position + new Vector2(0f, (ballBody.position.y < body.position.y ? -1f : 1f) 
-          * Random.Range(speedSpread.Item1, speedSpread.Item2) * Mathf.Abs(ballBody.velocity.y));
+          * Random.Range(speedSpread.Item1 * ballController.SpeedCoefficient,
+          speedSpread.Item2 * ballController.SpeedCoefficient) * Mathf.Abs(ballBody.velocity.y));
         if (newPosition.y < yBottomCoordinate || newPosition.y > yTopCoordinate) return;
         body.MovePosition(newPosition);
     }
