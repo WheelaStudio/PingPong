@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 3
+    serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    buildHeightMesh: 0
+    accuratePlacement: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -8869,17 +8869,9 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -9895,30 +9887,30 @@ MonoBehaviour:
   entries:
   - Language: Russian
     Text: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u043C\u0435\u0445\u0430\u043D\u0438\u043A\u0430
-      \u0438\u0433\u0440\u044B: \u0442\u0435\u043F\u0435\u0440\u044C \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u044C
-      \u0448\u0430\u0440\u0438\u043A\u0430 \u0437\u0430\u0432\u0438\u0441\u0438\u0442
-      \u043E\u0442 \u0442\u043E\u0433\u043E, \u043A\u0430\u043A\u0438\u043C \u043C\u0435\u0441\u0442\u043E\u043C
-      \u0442\u044B \u043E\u0442\u043E\u0431\u044C\u0451\u0448\u044C \u0435\u0433\u043E!"
+      \u0438\u0433\u0440\u044B: \u043F\u043E\u0434\u0430\u0447\u0430 \u043C\u044F\u0447\u0430
+      \u0441 \u0446\u0435\u043D\u0442\u0440\u0430 \u0438\u0434\u0451\u0442 \u0438\u0433\u0440\u043E\u043A\u0443,
+      \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0442\u043E\u043B\u044C\u043A\u043E
+      \u0447\u0442\u043E \u043F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u043B"
     Object: {fileID: 0}
   - Language: English
-    Text: 'The mechanics of the game have been changed: now the speed of the ball
-      depends on where you hit it!'
+    Text: 'The game mechanics have been changed: the ball from the center goes to
+      the player who just conceded'
     Object: {fileID: 0}
   - Language: French
-    Text: "La m\xE9canique du jeu a \xE9t\xE9 modifi\xE9e : d\xE9sormais, la vitesse
-      de la balle d\xE9pend de l'endroit o\xF9 vous la frappez !"
+    Text: "La m\xE9canique du jeu a \xE9t\xE9 modifi\xE9e : le ballon du centre va
+      au joueur qui vient de conc\xE9der"
     Object: {fileID: 0}
   - Language: German
-    Text: "Die Spielmechanik wurde ge\xE4ndert: Jetzt h\xE4ngt die Geschwindigkeit
-      des Balls davon ab, wo du ihn triffst!"
+    Text: "Die Spielmechanik wurde ge\xE4ndert: Der Ball aus der Mitte geht an den
+      Spieler, der gerade kassiert hat"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "Se ha cambiado la mec\xE1nica del juego: \xA1ahora la velocidad de la
-      pelota depende de d\xF3nde la golpees!"
+    Text: "Se ha cambiado la mec\xE1nica de juego: el bal\xF3n del centro va al jugador
+      que acaba de conceder"
     Object: {fileID: 0}
   - Language: Italian
-    Text: "Le meccaniche di gioco sono state modificate: ora la velocit\xE0 della
-      pallina dipende da dove la colpisci!"
+    Text: 'Le meccaniche di gioco sono state cambiate: la palla dal centro va al
+      giocatore che ha appena concesso'
     Object: {fileID: 0}
 --- !u!1 &1658926008
 GameObject:
@@ -10350,7 +10342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

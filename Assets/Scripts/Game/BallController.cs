@@ -3,6 +3,11 @@ using System.Collections;
 
 public class BallController : MonoBehaviour
 {
+    private enum LosingPlayer
+    {
+        Left, Right, Unknown
+    }
+    private LosingPlayer _currentLosingPlayer = LosingPlayer.Unknown;
     private const float MINIMUM_BALL_SPEED_FACTOR = 0.95f;
     private const float POSITION_DIFFERENCE_COEFFICIENT = 0.2f;
     [SerializeField] private AudioSource commonCollisonSound, atariBeep, atariPeep, atariPlop;
@@ -74,6 +79,7 @@ public class BallController : MonoBehaviour
     {
         if (Preferences.CurrentGameDesign == GameDesign.Atari)
             atariPeep.Play();
+        _currentLosingPlayer = collision.gameObject.name == "leftEdge" ? LosingPlayer.Left : LosingPlayer.Right;
         IsOnTheField = false;
         OnExitFromTheField.Invoke();
         yield return resetPositionDelay;
@@ -87,7 +93,12 @@ public class BallController : MonoBehaviour
     }
     private void StartMove()
     {
-        body.AddForce(new Vector2(Random.Range(0, 2) == 0 ? 0.1f : -0.1f, Random.Range(0, 2) == 0 ? Random.Range(0.05f, 0.15f) :
+        float x;
+        if (_currentLosingPlayer == LosingPlayer.Unknown)
+            x = Random.Range(0, 2) == 0 ? 0.1f : -0.1f;
+        else
+            x = _currentLosingPlayer == LosingPlayer.Left ? -0.1f : 0.1f;
+        body.AddForce(new Vector2(x, Random.Range(0, 2) == 0 ? Random.Range(0.05f, 0.15f) :
             Random.Range(-0.15f, -0.05f)), ForceMode2D.Impulse);
     }
     private void FixedUpdate()
