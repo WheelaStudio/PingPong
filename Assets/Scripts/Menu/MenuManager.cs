@@ -18,6 +18,9 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         Preferences.Init();
+#if UNITY_IOS
+        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
+#endif
     }
     private void Start()
     {
